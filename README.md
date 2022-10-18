@@ -48,7 +48,7 @@ base_url =  https://biotworld.in/api/external
 #### Response
 ```json
 {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE2NjU3NDE3NjN9.s6MoReMqc_29hXErb1YuzhZdc5w0plyAyQIjB1k7i3A"
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE2NjU3NDE3NjN9.s6MoReMqc_29hXErb1YuzhZdc5w0plyAyQIjB1k7i3A"
 }
 
 
@@ -162,10 +162,10 @@ If the user has entered all the data correctly then they will receive a success 
 ``` json
 
 {
-"success": true,
-"status_code": 200,
-"error_code": 0,
-"message": "User has synced successfully." 
+  "success": true,
+  "status_code": 200,
+  "error_code": 0,
+  "message": "User has synced successfully." 
 }
 
 ```
@@ -174,12 +174,12 @@ If the user has entered all the data correctly then they will receive a success 
 In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has been successfully saved so next time the user only enters a particular object where there was error and again sends the request.
 
 
-``` jjson
+``` json
 {
-"Total_count":10,
-"success_count":5,
-"error_count": 5,
-"description": "There was an error while adding Emp_id please re enter Emp_id for the last 5 entry"
+  "Total_count":10,
+  "success_count":5,
+  "error_count": 5,
+  "description": "There was an error while adding Emp_id please re enter Emp_id for the last 5 entry"
 }
 
 
@@ -367,18 +367,18 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ``` json
 {
 "data":[
-		        {
-             "user_id":"10000119",
-             "name":"john smith",
-             "department":"development",
-             "designation":"project manager",
-             "date":"2022-10-27",
-             "time":"10:00:00",	
-             "io flag":"i"
+	 {
+            "user_id":"10000119",
+            "name":"john smith",
+            "department":"development",
+            "designation":"project manager",
+            "date":"2022-10-27",
+            "time":"10:00:00",	
+            "io flag":"i"
              
- 	         },
+ 	  },
              
-		         {
+          {
               "user_id":"10000119",
               "name":"john smith",
               "department":"development",
@@ -386,8 +386,9 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
               "date":"2022-10-27",
               "time":"19:00:00",	
               "io flag":"o"
- 	         }
-	     ]
+	      
+ 	  }
+       ]
 }
 ```
 
@@ -410,7 +411,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ``` json
 {
 "data":[
-		        {
+ 	  {
              "user_id":"10000119",
              "name":"john smith",
              "department":"development",
@@ -423,8 +424,8 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
              "last_punch_device_id":"5d55",
              "start_shift": "10:00:00 ",
              "end_shift": "19:00:00"
-         }
-	     ]
+           }
+       ]
 }
 
 ```
@@ -448,7 +449,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ``` json
 {
 "data":[
-		         {
+	 {
              "user_id":"10000119",
              "name":"john smith",
              "department":"development",
@@ -460,7 +461,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
              "last_out_time":"19:00:00",	
              "last_out_device_id":"5d55",
           }
-	     ]
+	]
 }
 
 
