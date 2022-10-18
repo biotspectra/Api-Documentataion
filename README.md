@@ -26,17 +26,18 @@ When a user sends a request with payload (mobile_number & password) an authentic
  ## All Api Request & Response are shown below:
  #### we have stored the url in a variable call `base_url`
 ```http
-base_url =  https://biotworld.in/api/external/
+base_url =  https://biotworld.in/api/external
 ```
 ## Authentication API:
  ```
   Method: POST
-  URL: {{base_url}}login
+  URL: {{base_url}}/login
  ```
+
 
 #### Request
  User will Send a request with Mobile Number & Password
-```javascript
+```json
 {
    "mobile_number": "9586722584",
    "password"     : "12345"     ,
@@ -45,7 +46,7 @@ base_url =  https://biotworld.in/api/external/
 ```
 
 #### Response
-```javascript
+```json
 {
 "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE2NjU3NDE3NjN9.s6MoReMqc_29hXErb1YuzhZdc5w0plyAyQIjB1k7i3A"
 }
@@ -87,7 +88,7 @@ base_url =  https://biotworld.in/api/external/
 | `admin_id` | `0` | Normal User Data |
 | `admin_id` | `1` | Error |
 | `admin_id` | `2` | Error |
-| `admin_id` | `3` | User need to pass another Parameter name `location_access` with their values in an array like these `"location_accesss":[“ahmedabad”,”rajkot”,”mumbai”]` |
+| `admin_id` | `3` | User need to pass another Parameter name `location_access` with their values in an array like these `"location_accesss":["ahmedabad","rajkot","mumbai"]` |
 
 1. There is Parameter name `admin_id` which user can pass if they want data to be filter.
 2. If a user does not pass `is_admin` parameter in the payload then they will receivce all the data.
@@ -99,9 +100,9 @@ base_url =  https://biotworld.in/api/external/
 ## Step 1: Pass Authentication Token & authentic-key in the headers:
 Now user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
 
-```
+``` bash
  Method: POST
- URL: {{base_url}}employee
+ URL: {{base_url}}/employee
  Header: 
 "token": <jwt token>,
 "authentication-key": <client will get it from their email>,
@@ -110,55 +111,55 @@ Now user will need to pass that authentication token & authentication-key in hea
 ```
 
 ### Request 
-``` javascript
+``` json
 {
 "data":[
-{
-"name":"john smith" ,
-"user_id":"10000119",
-"date_of_join":"23–09-2019",
-"date_of_birth":"23–09-2019",
-"mobile_number":"23092019",
-"email_id":"test@gmail.com",
-"gender":"male", 
-"location":"ahmedabad",
-"designation":"project manager",
-"from_time":"10:00:00",
-"to_time":"19:00:00",
-"week_of_day1":"7",
-"week_of_day2":"6",
-"no_of_weekday":"2,4",
-"day_type":"1", [1 = full, 2 = half]
-"Is_admin":"3",
-"location_accesss":[“ahmedabad”,”rajkot”,”mumbai”],
-},
-{
-"name":"john smith" ,
-"user_id":"10000119",
-"date_of_join":"23–09-2019",
-"date_of_birth":"23–09-2019",
-"mobile_number":"23092019",
-"email_id":"test@gmail.com",
-"gender":"male",
-"location":"ahmedabad",
-"designation":"project manager",
-"from_time":"10:00:00",
-"to_time":"19:00:00",
-"week_of_day1":"7",
-"week_of_day2":"6",
-"no_of_weekday":"2,4",
-"day_type":"1", [1 = full, 2 = half]
-"is_admin":"0",
-},
+     {
+       "name":"john smith" ,
+       "user_id":"10000119",
+       "date_of_join":"23–09-2019",
+       "date_of_birth":"23–09-2019",
+       "mobile_number":"23092019",
+       "email_id":"test@gmail.com",
+       "gender":"male", 
+       "location":"ahmedabad",
+       "designation":"project manager",
+       "from_time":"10:00:00",
+       "to_time":"19:00:00",
+       "week_of_day1":"7",
+       "week_of_day2":"6",
+       "no_of_weekday":"2,4",
+       "day_type":"1","[1 = full, 2 = half]"
+       "Is_admin":"3",
+       "location_accesss":["ahmedabad","rajkot","mumbai"],
+     },
+    {
+       "name":"john smith" ,
+       "user_id":"10000119",
+       "date_of_join":"23–09-2019",
+       "date_of_birth":"23–09-2019",
+       "mobile_number":"23092019",
+       "email_id":"test@gmail.com",
+       "gender":"male",
+       "location":"ahmedabad",
+       "designation":"project manager",
+       "from_time":"10:00:00",
+       "to_time":"19:00:00",
+       "week_of_day1":"7",
+       "week_of_day2":"6",
+       "no_of_weekday":"2,4",
+       "day_type":"1","[1 = full, 2 = half]"
+       "is_admin":"0",
+    },
 
-]
+  ]
 }
 ```
 
 
 ### Success Resposnse
 If the user has entered all the data correctly then they will receive a success response that your data has been synced successfully.
-``` javascript
+``` json
 
 {
 "success": true,
@@ -173,7 +174,7 @@ If the user has entered all the data correctly then they will receive a success 
 In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has been successfully saved so next time the user only enters a particular object where there was error and again sends the request.
 
 
-``` javascript
+``` jjson
 {
 "Total_count":10,
 "success_count":5,
@@ -184,40 +185,42 @@ In case any error occurs during sending the request, then the user will be able 
 
 ```
 
-``` javascript 
+``` json
 [
-{
-"success":true,
-"status_code":200,
+   {
+     "success":true,
+     "status_code":200,
+   },
 
-},
+   {
+    "success": false,
+    "status_code": 400,
+    "error_code": 1
+   },
 
-{
-"success": false,
-"status_code": 400,
-"error_code": 1
-},
-
-{
-"success": false,
-"status_code": 400,
-"error_code": 2
-},
-{
-"success": false,
-"status_code": 400,
-"error_code": 3
-},
-{
-"success": false,
-"status_code": 400,
-"error_code": 4
-},
-{
-"success": false,
-"status_code": 400,
-"error_code": 5
-}
+  {
+    "success": false,
+    "status_code": 400,
+    "error_code": 2
+  },
+  
+  {
+    "success": false,
+    "status_code": 400,
+    "error_code": 3
+  },
+  
+  {
+    "success": false,
+    "status_code": 400,
+    "error_code": 4
+  },
+  
+  {
+   "success": false,
+   "status_code": 400,
+   "error_code": 5
+  }
 ]
 ```
 
@@ -249,9 +252,9 @@ In case any error occurs during sending the request, then the user will be able 
 
 # 1B) User Synchronization Get Api
 
-```
+``` bash
  Method: GET
- URL: https://biotworld.in/api/external/employee/
+ URL: {{base_url}}/employee
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -262,47 +265,47 @@ In case any error occurs during sending the request, then the user will be able 
 
 ### Response
 
-``` javascript
+``` json
 {
 "data":[
-{
-"name":"john smith" ,
-"user_id":"10000119",
-"date_of_join":"23–09-2019",
-"date_of_birth":"23–09-2019",
-"mobile_number":"23092019",
-"email_id":"test@gmail.com",
-"gender":"male",
-"department":"development",
-"designation":"project manager",
-"from_time":"10:00:00",
-"to_time":"19:00:00",
-"week_of_day1":"7",
-"week_of_day2":"6",
-"no_of_weekday":"2,4",
-"day_type":"1", [1 = full, 2 = half]
-"is_admin":"1",
-},
-{
-"name":"john smith" ,
-"user_id":"10000119",
-"date_of_join":"23–09-2019",
-"date_of_birth":"23–09-2019",
-"mobile_number":"23092019",
-"email_id":"test@gmail.com",
-"gender":"male",
-"department":"development",
-"designation":"project manager",
-"from_time":"10:00:00",
-"to_time":"19:00:00",
-"week_of_day1":"7",
-"week_of_day2":"6",
-"no_of_weekday":"2,4",
-"day_type":"1", [1 = full, 2 = half]
-"is_admin":"1",
-},
+          {
+            "name":"john smith" ,
+            "user_id":"10000119",
+            "date_of_join":"23–09-2019",
+            "date_of_birth":"23–09-2019",
+            "mobile_number":"23092019",
+            "email_id":"test@gmail.com",
+            "gender":"male",
+            "department":"development",
+            "designation":"project manager",
+            "from_time":"10:00:00",
+            "to_time":"19:00:00",
+            "week_of_day1":"7",
+            "week_of_day2":"6",
+            "no_of_weekday":"2,4",
+            "day_type":"1", "[1 = full, 2 = half]"
+            "is_admin":"1",
+         },
+        {
+          "name":"john smith" ,
+          "user_id":"10000119",
+          "date_of_join":"23–09-2019",
+          "date_of_birth":"23–09-2019",
+          "mobile_number":"23092019",
+          "email_id":"test@gmail.com",
+          "gender":"male",
+          "department":"development",
+          "designation":"project manager",
+          "from_time":"10:00:00",
+          "to_time":"19:00:00",
+          "week_of_day1":"7",
+          "week_of_day2":"6",
+          "no_of_weekday":"2,4",
+          "day_type":"1", "[1 = full, 2 = half]"
+          "is_admin":"1",
+         },
 
-]
+      ]
 }
 
 
@@ -324,4 +327,186 @@ In case any error occurs during sending the request, then the user will be able 
 | `email_id ` | `string` | `Response will filtered with given email_id ` |
 | `department ` | `string` | `Response will filtered with given department ` |
 | `designation ` | `string` | `Response will filtered with given designation ` |
+
+
+#### For Single Filteration:
+1. Name            :  https://biotworld.in/api/external/employee?name=xyz
+2. UserID          :  https://biotworld.in/api/external/employee?user_id=xyz
+3. Date of Joining :  https://biotworld.in/api/external/employee?date_of_join=22-11-2020
+4. Date of birth   : https://biotworld.in/api/external/employee?date_of_birth=11-05-1994
+5. Mobile number   : https://biotworld.in/api/external/employee?mobile_number=8469368525 
+6. Email id        : https://biotworld.in/api/external/employee?email_id=xyz.test.com 
+7. Department      : https://biotworld.in/api/external/employee?department=development
+8. Designation     : https://biotworld.in/api/external/employee?designation=manager
+
+#### For Multiple Filteration:
+https://biotworld.in/api/external/employee?department=IT&designation=manager 
+
+
+
+# 2) Transaction (punch detail) :
+### To get Transaction details user need to pass these parameter in the url `transaction_type`, `from_date` & `to_date` with their respective values as shown below
+
+## Step 1: When User pass `transaction_type` as `0`
+User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
+
+
+``` bash
+
+ Method: GET
+ URL: {{base_url}}/transactions?transaction_type=0?from_date=1-01-2022?to_date=30-01-2022
+ Header: 
+"token": <jwt token>,
+"authentic-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+
+#### Response for Transaction log (when transaction_type == 0): 
+
+``` json
+{
+"data":[
+		        {
+             "user_id":"10000119",
+             "name":"john smith",
+             "department":"development",
+             "designation":"project manager",
+             "date":"2022-10-27",
+             "time":"10:00:00",	
+             "io flag":"i"
+             
+ 	         },
+             
+		         {
+              "user_id":"10000119",
+              "name":"john smith",
+              "department":"development",
+              "designation":"project manager",
+              "date":"2022-10-27",
+              "time":"19:00:00",	
+              "io flag":"o"
+ 	         }
+	     ]
+}
+```
+
+## Step 2: When User pass `transaction_type` as `1`
+User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
+
+``` bash
+
+ Method: GET
+ URL: {{{base_url}}/transactions?transaction_type=1?from_date=1-01-2022?to_date=30-01-2022
+ Header: 
+"token": <jwt token>,
+"authentic-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+
+#### Response for Transaction log (when transaction_type == 1): 
+
+``` json
+{
+"data":[
+		        {
+             "user_id":"10000119",
+             "name":"john smith",
+             "department":"development",
+             "designation":"project manager",
+             "first_punch_date":"2022-10-27",
+             "first_punch_time":"10:00:00",	
+             "first_punch_device_id":"5d44",
+             "last_punch_date":"2022-10-27",
+             "last_punch_time":"19:00:00",	
+             "last_punch_device_id":"5d55",
+             "start_shift": "10:00:00 ",
+             "end_shift": "19:00:00"
+         }
+	     ]
+}
+
+```
+
+## Step 2: When User pass `transaction_type` as `2`
+User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
+
+``` bash
+
+ Method: GET
+ URL: {{{base_url}}/transactions?transaction_type=2?from_date=1-01-2022?to_date=30-01-2022
+ Header: 
+"token": <jwt token>,
+"authentic-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+
+#### Response for Transaction log (when transaction_type == 2): 
+
+``` json
+{
+"data":[
+		         {
+             "user_id":"10000119",
+             "name":"john smith",
+             "department":"development",
+             "designation":"project manager",
+             "first_in_date":"2022-10-27",
+             "first_in_time":"10:00:00",	
+             "first_in_device_id":"5d44",
+             "last_out_date":"2022-10-27",
+             "last_out_time":"19:00:00",	
+             "last_out_device_id":"5d55",
+          }
+	     ]
+}
+
+
+```
+
+## Events:
+1. It will provide data as per data-flag. Single api provides three types of different responses which depend on data-flag. Data flags like 0 = transaction log , 1 =  first and last punch, 2 = First_In and Last_Out punch.
+2. It will provide data as per passed filter parameter.
+
+
+### Filteration will perform by the fields that are listed below:
+
+| Parameters | Type | Description |
+| :--- | :--- | :--- |
+| `name ` | `string` | `Response will filtered with given name ` |
+| `device_id ` | `string` | `Response will filtered with given device_id ` |
+| `user_id ` | `string` | `Response will filtered with given user_id` |
+| `date` | `string` | `Response will filtered with given date` |
+| `department` | `integer` | `Response will filtered with given department ` |
+| `designation ` | `string` | `Response will filtered with given designation ` |
+
+
+#### For Single Filteration:
+1. Name            :  https://biotworld.in/api/external/employee?name=xyz
+2. UserID          :  https://biotworld.in/api/external/employee?user_id=xyz
+3. Device id       :  https://biotworld.in/api/external/transactions?transaction_type=0&device_id=5d55
+4. Date            :  https://biotworld.in/api/external/employee?date=22-11-2020 
+5. Department      :  https://biotworld.in/api/external/employee?department=development
+6. Designation     :  https://biotworld.in/api/external/employee?designation=manager
+
+
+#### For Multiple Filteration:
+https://biotworld.in/api/external/transactions?transaction_type=0&department=development&designation=manager 
+
+
+### Additional implementation in biot :
+1. Biot admin panel client management menu export all records at a time as of now it will only export on bases on pagination limit.
+2. Add a new report called biot subscription for biot admin panel which will provide data about client subscription plan details.
+3. Add functionality to change owner name from biot admin panel.
+
+
+
+
+
+
+
+
+
 
