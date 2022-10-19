@@ -1,5 +1,3 @@
-# Api-Documentation
-
 
 ## Making your first API call
 
@@ -9,6 +7,9 @@ We've written a quick step-by-step guide to walk you through how to login on Bio
 ## Introduction
 
 This Api service will help users to synchronize their data with biot & fetch that data into their own system. For this we have created various Api services where user can purchase services as per their requierment and get acccess towards it. To learn more about this we have created step by step guide where user will get to learn how to integrate this Api with their system. To Know more About this, [Please Contact Our Sales Team](https://biotworld.in/general-inquiry-biot/).
+
+
+<img src="https://biotworld.in/wp-content/uploads/2022/02/biometric-machine.png" width="400" height="400" />
 
 
 ## How it works
@@ -23,9 +24,10 @@ When a user sends a request with payload (mobile_number & password) an authentic
 
 
 
- ## All Api Request & Response are shown below:
- #### we have stored the url in a variable call `base_url`
-```http
+## All Api Request & Response are shown below:
+
+#### we have stored the url in a variable call `base_url`
+```
 base_url =  https://biotworld.in/api/external
 ```
 ## Authentication API:
@@ -100,7 +102,7 @@ base_url =  https://biotworld.in/api/external
 ## Step 1: Pass Authentication Token & authentic-key in the headers:
 Now user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
 
-``` bash
+``` javascript
  Method: POST
  URL: {{base_url}}/employee
  Header: 
@@ -252,7 +254,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 # 1B) User Synchronization Get Api
 
-``` bash
+``` 
  Method: GET
  URL: {{base_url}}/employee
  Header: 
@@ -351,7 +353,7 @@ https://biotworld.in/api/external/employee?department=IT&designation=manager
 User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
 
 
-``` bash
+``` 
 
  Method: GET
  URL: {{base_url}}/transactions?transaction_type=0?from_date=1-01-2022?to_date=30-01-2022
@@ -395,8 +397,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ## Step 2: When User pass `transaction_type` as `1`
 User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
 
-``` bash
-
+``` 
  Method: GET
  URL: {{{base_url}}/transactions?transaction_type=1?from_date=1-01-2022?to_date=30-01-2022
  Header: 
@@ -433,7 +434,8 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ## Step 2: When User pass `transaction_type` as `2`
 User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
 
-``` bash
+
+``` 
 
  Method: GET
  URL: {{{base_url}}/transactions?transaction_type=2?from_date=1-01-2022?to_date=30-01-2022
