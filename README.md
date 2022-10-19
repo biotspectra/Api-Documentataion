@@ -1,12 +1,12 @@
 
 ## Making your first API call
 
-We've written a quick step-by-step guide to walk you through how to login on Biot User account, make your first API call, and interpret the results.
+We've written a quick step-by-step guide to walk you through how to login inside Biot user panel, make your first API call inside your system, and interpret the results.
 
 
 ## Introduction
 
-This Api service will help users to synchronize their data with biot & fetch that data into their own system. For this we have created various Api services where user can purchase services as per their requierment and get acccess towards it. To learn more about this we have created step by step guide where user will get to learn how to integrate this Api with their system. To Know more About this, [Please Contact Our Sales Team](https://biotworld.in/general-inquiry-biot/).
+This Api service will help users to synchronize their data with biot & fetch that data into their own system. For this we have created various Api services where user can purchase services as per their requierment and get acccess towards it. To learn more about this we have created step by step guide where user will get to learn how to integrate this Api with their system. To Know more About this, [Please Contact Our Team](https://biotworld.in/general-inquiry-biot/).
 
 
 <p align="center">
@@ -20,9 +20,9 @@ This Api service will help users to synchronize their data with biot & fetch tha
 ## Login
 
 ### Step 1: Login inside Biot User panel: 
-When a user sends a request with payload (mobile_number & password) an authentication token is generated which you will receive in a response as well as you will receive authentication-key via mail. 
+When a user sends a request with payload (mobile_number & password) an authentication token is generated which you will receive in your response as well as you will receive authentication-key via mail.  
 
-
+**Note** you need to pass both `authentication token` & `authentication-key` inside your header while calling any api
 
 
 
