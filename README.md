@@ -33,12 +33,10 @@ When a user sends a request with payload (mobile_number & password) an authentic
 base_url =  https://biotworld.in/api/external
 
 ```
-#### base_url should be pass like this (inside the double curly braces)
-`{{base_url}}`
 ### Authentication API:
  ```
   Method: POST
-  URL: base_url/login
+  URL: <base_url>/login
  ```
 
 
@@ -111,7 +109,7 @@ Now user will need to pass that authentication token & authentication-key in hea
 
 ```
  Method: POST
- URL: base_url/employee
+ URL: <base_url>/employee
  Header: 
 "token": <jwt token>,
 "authentication-key": <client will get it from their email>,
@@ -263,7 +261,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 ``` 
  Method: GET
- URL: base_url/employee
+ URL: <base_url>/employee
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -339,20 +337,20 @@ In case any error occurs during sending the request, then the user will be able 
 
 #### For Single Filteration:
 ```
-1. Name            :  base_url/employee?name=rajat
-2. UserID          :  base_url/employee?user_id=256
-3. Date of Joining :  base_url/employee?date_of_join=22-11-2020
-4. Date of birth   :  base_url/employee?date_of_birth=11-05-1994
-5. Mobile number   :  base_url/employee?mobile_number=8469368525 
-6. Email id        :  base_url/employee?email_id=rajat@gmail.com 
-7. Department      :  base_url/employee?department=development
-8. Designation     :  base_url/employee?designation=manager
+1. Name            :  <base_url>/employee?name=rajat
+2. UserID          :  <base_url>/employee?user_id=256
+3. Date of Joining :  <base_url>/employee?date_of_join=22-11-2020
+4. Date of birth   :  <base_url>/employee?date_of_birth=11-05-1994
+5. Mobile number   :  <base_url>/employee?mobile_number=8469368525 
+6. Email id        :  <base_url>/employee?email_id=rajat@gmail.com 
+7. Department      :  <base_url>/employee?department=development
+8. Designation     :  <base_url>/employee?designation=manager
 
 ```
 
 #### For Multiple Filteration:
 ```
-base_url/employee?department=IT&designation=manager 
+<base_url>/employee?department=IT&designation=manager 
 
 ```
 
@@ -368,7 +366,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ``` 
 
  Method: GET
- URL: base_url/transactions?transaction_type=0?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=0?from_date=1-01-2022?to_date=30-01-2022
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -411,7 +409,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 
 ``` 
  Method: GET
- URL: base_url/transactions?transaction_type=1?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=1?from_date=1-01-2022?to_date=30-01-2022
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -450,7 +448,7 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ``` 
 
  Method: GET
- URL: base_url/transactions?transaction_type=2?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=2?from_date=1-01-2022?to_date=30-01-2022
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -500,19 +498,19 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 
 #### For Single Filteration:
 ```
-1. Name            :  base_url/employee?name=rajat
-2. UserID          :  base_url/employee?user_id=256
-3. Device id       :  base_url/transactions?transaction_type=0&device_id=5d55
-4. Date            :  base_url/employee?date=22-11-2020 
-5. Department      :  base_url/employee?department=development
-6. Designation     :  base_url/employee?designation=manager
+1. Name            :  <base_url>/employee?name=rajat
+2. UserID          :  <base_url>/employee?user_id=256
+3. Device id       :  <base_url>/transactions?transaction_type=0&device_id=5d55
+4. Date            :  <base_url>/employee?date=22-11-2020 
+5. Department      :  <base_url>/employee?department=development
+6. Designation     :  <base_url>/employee?designation=manager
 
 ```
 
 
 #### For Multiple Filteration:
 ```
-base_url/transactions?transaction_type=0&department=development&designation=manager 
+<base_url>/transactions?transaction_type=0&department=development&designation=manager 
 
 ```
 
