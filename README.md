@@ -33,12 +33,12 @@ When a user sends a request with payload (mobile_number & password) an authentic
 base_url =  https://biotworld.in/api/external
 
 ```
-#### base_url should be pass like this "{{{base_url}}}" (inside the double curly)
+#### base_url should be pass like this "{{{base_url}}}" (inside the double curly braces)
 
 ### Authentication API:
  ```
   Method: POST
-  URL: <base_url>/login
+  URL: base_url/login
  ```
 
 
@@ -54,9 +54,9 @@ base_url =  https://biotworld.in/api/external
 
 #### Response
 ```json
-{
+{{
    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE2NjU3NDE3NjN9.s6MoReMqc_29hXErb1YuzhZdc5w0plyAyQIjB1k7i3A"
-}
+}}
 
 
 ```
