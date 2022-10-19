@@ -62,7 +62,7 @@ base_url =  https://biotworld.in/api/external
 ## 1A) User Synchronization Post Api
 
 ### Instructions:
-* Users can send Maximum 10 records within the particular api hit.
+* Users can send Maximum 10 records within a single API hit.
 * List of field's you need to pass in the payload while calling Api are listed below
 
 
@@ -137,7 +137,7 @@ Now user will need to pass that authentication token & authentication-key in hea
        "week_of_day2":"6",
        "no_of_weekday":"2,4",
        "day_type":"1","[1 = full, 2 = half]"
-       "Is_admin":"3",
+       "is_admin":"3",
        "location_accesss":["ahmedabad","rajkot","mumbai"],
      },
     {
@@ -257,17 +257,22 @@ In case any error occurs during sending the request, then the user will be able 
 3. It will not store access related data like finger,  BLE card, face. It will only store from the Biot App.
 
 
-## 1B) User Synchronization Get Api
+## 1B) User Synchronization Get Api:
+
+* User will receive number of records `10` per page
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
 
 ``` 
  Method: GET
- URL: <base_url>/employee
+ URL: <base_url>/employee?page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
 "content-type": application/json
 
 ```
+
+
 
 #### Response
 
@@ -337,20 +342,20 @@ In case any error occurs during sending the request, then the user will be able 
 
 #### For Single Filteration:
 ```
-1. Name            :  <base_url>/employee?name=rajat
-2. UserID          :  <base_url>/employee?user_id=256
-3. Date of Joining :  <base_url>/employee?date_of_join=22-11-2020
-4. Date of birth   :  <base_url>/employee?date_of_birth=11-05-1994
-5. Mobile number   :  <base_url>/employee?mobile_number=8469368525 
-6. Email id        :  <base_url>/employee?email_id=rajat@gmail.com 
-7. Department      :  <base_url>/employee?department=development
-8. Designation     :  <base_url>/employee?designation=manager
+1. Name            :  <base_url>/employee?name=rajat&page_number=1
+2. UserID          :  <base_url>/employee?user_id=256&page_number=1
+3. Date of Joining :  <base_url>/employee?date_of_join=22-11-2020&page_number=1
+4. Date of birth   :  <base_url>/employee?date_of_birth=11-05-1994&page_number=1
+5. Mobile number   :  <base_url>/employee?mobile_number=8469368525&page_number=1
+6. Email id        :  <base_url>/employee?email_id=rajat@gmail.com&page_number=1 
+7. Department      :  <base_url>/employee?department=development&page_number=1
+8. Designation     :  <base_url>/employee?designation=manager&page_number=1
 
 ```
 
 #### For Multiple Filteration:
 ```
-<base_url>/employee?department=IT&designation=manager 
+<base_url>/employee?department=IT&designation=manager&page_number=1
 
 ```
 
@@ -360,13 +365,15 @@ In case any error occurs during sending the request, then the user will be able 
 #### To get Transaction details user need to pass these parameter in the url `transaction_type`, `from_date` & `to_date` with their respective values as shown below
 
 ### Step 1: When User pass `transaction_type` as `0`
-User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
+* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
+* User will receive number of records `10` per page
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
 
 
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=0?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=0&from_date=1-01-2022&to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -405,11 +412,13 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
+* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
+* User will receive number of records `10` per page
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
 
 ``` 
  Method: GET
- URL: <base_url>/transactions?transaction_type=1?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=1&from_date=1-01-2022&to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -442,13 +451,15 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 ```
 
 ### Step 2: When User pass `transaction_type` as `2`
-User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
+* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
+* User will receive number of records `10` per page
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
 
 
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=2?from_date=1-01-2022?to_date=30-01-2022
+ URL: <base_url>/transactions?transaction_type=2&from_date=1-01-2022&to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -498,19 +509,19 @@ User also need to pass `from_date` & `to_date` parameters in the url with their 
 
 #### For Single Filteration:
 ```
-1. Name            :  <base_url>/employee?name=rajat
-2. UserID          :  <base_url>/employee?user_id=256
-3. Device id       :  <base_url>/transactions?transaction_type=0&device_id=5d55
-4. Date            :  <base_url>/employee?date=22-11-2020 
-5. Department      :  <base_url>/employee?department=development
-6. Designation     :  <base_url>/employee?designation=manager
+1. Name            :  <base_url>/employee?name=rajat&page_number=1
+2. UserID          :  <base_url>/employee?user_id=256&page_number=1
+3. Device id       :  <base_url>/transactions?transaction_type=0&device_id=5d55&page_number=1
+4. Date            :  <base_url>/employee?date=22-11-2020&page_number=1
+5. Department      :  <base_url>/employee?department=development&page_number=1
+6. Designation     :  <base_url>/employee?designation=manager&page_number=1
 
 ```
 
 
 #### For Multiple Filteration:
 ```
-<base_url>/transactions?transaction_type=0&department=development&designation=manager 
+<base_url>/transactions?transaction_type=0&department=development&designation=manager&page_number=1
 
 ```
 
