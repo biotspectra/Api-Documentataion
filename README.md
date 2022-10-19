@@ -260,7 +260,7 @@ In case any error occurs during sending the request, then the user will be able 
 ## 1B) User Synchronization Get Api:
 
 * User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
  Method: GET
@@ -367,7 +367,7 @@ In case any error occurs during sending the request, then the user will be able 
 ### Step 1: When User pass `transaction_type` as `0`
 * User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
 * User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
 
 
 ``` 
@@ -414,7 +414,7 @@ In case any error occurs during sending the request, then the user will be able 
 ### Step 2: When User pass `transaction_type` as `1`
 * User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
 * User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
  Method: GET
@@ -453,7 +453,7 @@ In case any error occurs during sending the request, then the user will be able 
 ### Step 2: When User pass `transaction_type` as `2`
 * User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
 * User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive records
+* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
 
 
 ``` 
