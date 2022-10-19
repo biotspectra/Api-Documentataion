@@ -102,7 +102,7 @@ base_url =  https://biotworld.in/api/external
 ## Step 1: Pass Authentication Token & authentic-key in the headers:
 Now user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
 
-``` javascript
+```
  Method: POST
  URL: {{base_url}}/employee
  Header: 
