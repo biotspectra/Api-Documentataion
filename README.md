@@ -1,5 +1,5 @@
 
-## Making your first API call
+# Third Party API Integrations
 
 We've written a quick step-by-step guide to walk you through how to login inside Biot user panel, make your first API call inside your system, and interpret the results.
 
