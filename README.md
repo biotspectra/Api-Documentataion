@@ -212,7 +212,7 @@ In case any error occurs during sending the request, then the user will be able 
    },
 
    {
-    "status": failed,
+    "status": "failed",
     "status_code": 400,
     "error_code": 1
    },
