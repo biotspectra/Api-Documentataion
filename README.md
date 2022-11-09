@@ -100,12 +100,11 @@ If your acccount is not registered then user will get below response.
 | Date of joining | varchar(50) | Mandatory | Enter the Date of Joining of the user|
 | Email| varchar(50) | Mandatory | Enter Email Id for the user |
 | Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
-| Mode | boolean() | Mandatory |  
 | Date of Birth | dateTime() | Optional | Enter Date of birth of the user |
 | Gender | tinyint(1)  | Optional | Male,Female,other |
 | Department | varchar(30 | Optional | Name of Department which belongs to the user.|
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
-| Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift start time as 24 hrs format in HH:MM |
+| Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
 | Designation | varchar(30)  | Optional | Enter Designation of the user|
 | Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
 | Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
@@ -122,7 +121,8 @@ If your acccount is not registered then user will get below response.
 | user_role | 3 | Supervisor |
 | user_role | Other Than 0,2,3 | Provided user_role is not available|
 
-#### Description
+#### Description:
+The following endpoint creates a user using basic details such as name, email, mobile_number, department, designation and so on.
 
 1. This Parameter user_role is used to assign specific roles to users, roles can be either normal user, sub admin or supervisor, Default value for parameter role is considered as 0 .
 2. Below is the detail explanation about roles:
@@ -152,8 +152,8 @@ Now the user will need to pass that authentication token & authentication-key in
      {
        "name":"john smith",
        "date_of_joining":"23–09-2019",
-       "date_of_birth":"23–09-2019",
-       "mobile_number":"23092019",
+       "date_of_birth":"23–09-1999",
+       "mobile_number":"2309201912",
        "email":"test@gmail.com",
        "gender":"male", 
        "designation":"project manager",
@@ -168,11 +168,10 @@ Now the user will need to pass that authentication token & authentication-key in
        "user_role":"2"
      },
     {
-       "name":"john smith" ,
-       "user_id":"10000119",
+       "name":"Dwayne Johnson" ,
        "date_of_joining":"23–09-2019",
-       "date_of_birth":"23–09-2019",
-       "mobile_number":"23092019",
+       "date_of_birth":"23–09-1998",
+       "mobile_number":"2309201922",
        "email":"test@gmail.com",
        "gender":"male",
        "location":"ahmedabad",
@@ -261,45 +260,44 @@ In case any error occurs during sending the request, then the user will be able 
 
 #### Error Response & their failure cases are shown below:
 
-| Error code | Error message| 
-| :--- | :--- |
-| 1 | Please enter user name| 
-| 2 | | 
-| 3 | This user is already added | 
-| 4 | Please enter valid company id | 
-| 5 | Please do not enter more than 50 characters | 
-| 6 | Please enter mode | 
-| 7 | Please enter date_of_joining | 
-| 8 | Please enter email_id | 
-| 9 | Please enter valid email_id (eg. test@test.com)  | 
-| 10 | This email is already exists | 
-| 11 | Please enter mobile number | 
-| 12 | Please enter 10 digits only | 
-| 13 | This mobile number is already exists | 
-| 14 | Please enter valid date-format (dd-mm-yyyy) | 
-| 15 | Please enter valid date-format (dd-mm-yyyy) | 
+| Error code | Error message| Cause | Solution
+| :--- | :--- | :--- | :--- |
+| 1 | The {input field} is required .i.e. {name,mobile number and so on}  | A mandatory field is empty | Ensure all mandatory fields and values are present.|
+| 2 | Data Already Exist | An existing user record has been passed .i.e {name,email,mobile number} | Ensure that a unique user record is passed |
+| 3 | Please enter valid company id | Invalid Company Id has passed | Ensure that valid company Id is passed |
+| 4 | Please do not enter more than 50 characters | User have passed more than 50 characters .i.e {name,email,department,designation} | Ensure that less than 50 characters are passed |
+| 5 | Please enter valid email_id | Email Id format is not valid | Email id should be {example@mail.com} |
+| 6 | Mobile Number should consist 10 digits only| Email Id format is not valid | Email id should be {+91 9988776655} |
+| 7 | Please enter valid date-format  | {date of joining / date of birth } format is not valid | Date format should be (dd-mm-yyyy) |
+| 8 | Please enter valid start/end shift time | {shift start time / shift end time } format is not valid | Start/end shift should be in 24 hrs format in HH:MM |
+
 
 
 
 ## 1B) User Synchronization Get Api:
 
-* This Api is used get user records from biot account
+### Instructions 
+*  Default user will able to retrieves 10 records per page.
+* `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
+* `user_id` will be unique & auto generated.
+*  To fetch particular user data user need to pass `user_id` as parameter. 
+*  when fetching particular user data no need to pass `page_number` as parameter.
 
-### Discription:
-* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
+
+### Description:
+* The following endpoint retrieves the details of all the user data from biot account.
+
 
 
 ``` 
  Method: GET
- URL: <base_url>/employee?page_number=1
+ URL: <base_url>/employee?page_number=1 (when want all user record) | <base_url>/employee/10000119
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
 "content-type": application/json
 
 ```
-
-
 
 #### Response
 
@@ -310,8 +308,8 @@ In case any error occurs during sending the request, then the user will be able 
             "name":"john smith" ,
             "user_id":"10000119",
             "date_of_joining":"23–09-2019",
-            "date_of_birth":"23–09-2019",
-            "mobile_number":"23092019",
+            "date_of_birth":"23–09-2000",
+            "mobile_number":"2309201909",
             "email":"test@gmail.com",
             "gender":"male",
             "department":"development",
@@ -324,14 +322,14 @@ In case any error occurs during sending the request, then the user will be able 
                "offday2_applies_to_week": "2nd, 4th",
                "offday2_type": "half day"
              },
-            "user_role":"1",
+            "user_role":"2",
          },
         {
           "name":"john smith" ,
           "user_id":"10000119",
           "date_of_joining":"23–09-2019",
-          "date_of_birth":"23–09-2019",
-          "mobile_number":"23092019",
+          "date_of_birth":"23–09-2000",
+          "mobile_number":"2309201998",
           "email":"test@gmail.com",
           "gender":"male",
           "department":"development",
@@ -359,8 +357,8 @@ In case any error occurs during sending the request, then the user will be able 
 
 | Parameters | Type | Description |
 | :--- | :--- | :--- |
-| name  | string | Response will filtered with given name  |
 | user_id | string | Response will filtered with given user_id  |
+| name  | string | Response will filtered with given name  |
 | date_of_joining | string | Response will filtered with given date_of_joining  |
 | date_of_birth | string | Response will filtered with given date_of_birth |
 | mobile_number | integer | Response will filtered with given mobile_number |
@@ -387,6 +385,61 @@ In case any error occurs during sending the request, then the user will be able 
 <base_url>/employee?department=IT&designation=manager&page_number=1
 
 ```
+#### Error Response & their failure cases are shown below:
+| Error message| Cause | Solution
+| :--- | :--- | :--- |
+| The user id provided does not exist | The User Id does not belong to the requestor, or it doesn't exist. | Ensure that the User id is valid and belongs to the requestor.|
+
+
+
+## 1c) User Synchronization Edit Api:
+* This Api is used to Edit User records from Biot account.
+* In order to consume this api `user_id` is the parameter
+* User id value should be pass in the url 
+
+### Description:
+The following endpoint edits the user details such as the name, email, date_of_joining and so on.
+
+
+```
+ Method: POST
+ URL: <base_url>/employee/10000119
+ Header: 
+"token": <jwt token>,
+"authentication-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+
+#### Request 
+``` json
+"data":
+     {
+       "name":"john smiths",
+       "date_of_joining":"23–09-2017",
+       "date_of_birth":"23–09-1999",
+       "mobile_number":"2309201912",
+       "email":"john@gmail.com"
+     }
+     
+ ```
+ 
+ #### Success Response
+```json
+{
+   {
+  "status": "success",
+  "status_code": 200,
+  "message": "User updated successfully." 
+   }
+}
+
+
+```
+
+
+
+
 
 
 
