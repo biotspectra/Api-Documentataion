@@ -447,14 +447,15 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* Users need to pass attendance_date parameters in the url i.e. if the user wants first punch log & last punch log between this date 1- 01-   2022 to 30-01-2022. These parameters will get users first punch & last punch logs of the user between this particular date.
+* Users need to pass attendance_date parameter in the url these parameters will get users first punch & last punch logs.
+* `attendance_date` parameters are mandatory. 
 
 ### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
  Method: GET
- URL: <base_url>/transactions?transaction_type=1&transaction_from_date=1-01-2022&transaction_to_date=30-01-2022&page_number=1
+ URL: <base_url>/transactions?transaction_type=1&attendance_date=1-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -478,8 +479,8 @@ In case any error occurs during sending the request, then the user will be able 
              "last_punch_date":"2022-10-27",
              "last_punch_time":"19:00:00",	
              "last_punch_device_id":"5d55",
-             "start_shift": "10:00:00 ",
-             "end_shift": "19:00:00"
+             "shift_start_time": "10:00:00 ",
+             "shift_end_time": "19:00:00"
            }
        ]
 }
@@ -487,7 +488,8 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 3: When User pass `transaction_type` as `2`
-* Users need to pass transaction_from_date & transaction_to_date parameters in the url i.e. if the user wants first in punch log & last in punch log between this date   1-01-2022 to 30-01-2022. These parameters will get users In/Out punching logs of the user between this particular date.
+* Users need to pass attendance_date parameter in the url these parameters will get users first in punch & last out punch logs.
+* `attendance_date` parameters are mandatory. 
 
 
 ### Description:
@@ -497,7 +499,7 @@ In case any error occurs during sending the request, then the user will be able 
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=2&transaction_from_date=1-01-2022&transaction_to_date=30-01-2022&page_number=1
+ URL: <base_url>/transactions?transaction_type=2attendance_date=1-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
