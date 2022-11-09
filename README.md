@@ -50,7 +50,7 @@ base_url =  https://biotworld.in/api/external
 
 ```
 
-#### Response
+#### Success Response
 ```json
 {
    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE2NjU3NDE3NjN9.s6MoReMqc_29hXErb1YuzhZdc5w0plyAyQIjB1k7i3A"
@@ -59,49 +59,59 @@ base_url =  https://biotworld.in/api/external
 
 ```
 
+#### Error Response
+```json
+{
+  "Invalid Credentials"
+  
+}
+```
+
 ## 1A) User Synchronization Post Api
 
 ### Instructions:
 * Users can send Maximum 10 records within a single API hit.
-* List of field's you need to pass in the payload while calling Api are listed below
+* List of field's which needs to be pass in the payload while calling Api
 
 
 
 | Field | Datatype | Requirements | Description |
 | :--- | :--- | :--- | :--- |
 | Name | varchar(50) | Mandatory | User Name |
-| user_id | int | Mandatory | Unique User ID |
+| User Id | int | Mandatory | Unique User ID |
 | Date of joining | varchar(50) | Mandatory | User Name |
-| emailId | varchar(50) | Mandatory | Email validations |
-| Mobile no  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
-| mode | boolean() | Mandatory |  |
-| Date of birth | dateTime() | Optional |  |
-| gender | tinyint(1)  | Optional | 1=Male,2=Female,0=other |
-| department | varchar(30 | Optional | Name of Department which belongs to the user. |
-| from_time | dateTime() | Optional | Shift Start Time |
-| to_time | dateTime() | Optional | Shift End Time |
-| designation | varchar(30)  | Optional | User designation |
-| week_of_day1 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
-| week_of_day2 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
-| no_of_weekday | int | Optional| Pass number for which week of the month to apply week_of_day2. I.e. if pass 2,4 it’s consider as week_of_Day2 for second and forth week of the month.   |
-| day_type | int [1] | Optional | 1=Full Day,2=Half Day apply for Week_of_day2.  |
-| is_admin | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin,3=Location Admin |
+| Email Id | varchar(50) | Mandatory | Email validations |
+| Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 || Mode | boolean() | Mandatory |  
+| Date of Birth | dateTime() | Optional |  |
+| Gender | tinyint(1)  | Optional | 1=Male,2=Female,0=other |
+| Department | varchar(30 | Optional | Name of Department which belongs to the user. |
+| Shift Start Time | dateTime() | Optional | Shift Start Time user need to ptovide shift start time as 24hrs format in HH:MM |
+| Shift End Time | dateTime() | Optional |  Shift End Time user need to ptovide shift start time as 24hrs format in HH:MM |
+| Designation | varchar(30)  | Optional | User designation |
+| Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
+| Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
+| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all     off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
+| Off Day 2 Type | varchar(30) | Optional | 1=Full Day,2=Half Day apply for Week_of_day2.  |
+| Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisior |
 
-#### Note: `is_admin` parameter & value with description:
+#### Note: `Role` parameter & value with description:
 
 | Parameter | Value | Description |
 | :--- | :--- | :--- |
-| admin_id | 0 | Normal User Data |
-| admin_id | 1 | Error |
-| admin_id | 2 | Error |
-| admin_id | 3 | User need to pass another Parameter name `location_access` with their values in an array like these `"location_accesss":["ahmedabad","rajkot","mumbai"]` |
+| role | 0 | Normal User Data |
+| role | Other Than 0,2,3 | Provided role is not available |
+| role | 2 | Sub Admin |
+| role | 3 | Supervisior |
 
 #### Description
-1. There is Parameter name `admin_id` which user can pass if they want data to be filter.
-2. If a user does not pass `is_admin` parameter in the payload then they will receivce all the data.
-2. If a user pass  `is_admin` parameter as `1` then they will get an error.
-3. If a user pass  `is_admin` parameter as `0` then they will receive normal user data.
-4. If a user pass `is_admin` parameter as `3` then they need to pass another parameter `location_access` with field as `xyz` then they can post & receive data as per      the location.
+
+1. This Parameter `role` is used to assign specific role to user, roles can be either normal user, sub admin or supervisior, Default value for parameter role is          considered as 0 .
+2. Below is the detail explanation about roles:
+
+  * Normal User can mark & regularize the attendance 
+  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management & 
+  
+
 
 
 ### Step 1: Pass Authentication Token & authentic-key in the headers:
@@ -129,16 +139,16 @@ Now user will need to pass that authentication token & authentication-key in hea
        "mobile_number":"23092019",
        "email_id":"test@gmail.com",
        "gender":"male", 
-       "location":"ahmedabad",
        "designation":"project manager",
-       "from_time":"10:00:00",
-       "to_time":"19:00:00",
-       "week_of_day1":"7",
-       "week_of_day2":"6",
-       "no_of_weekday":"2,4",
-       "day_type":"1","[1 = full, 2 = half]"
-       "is_admin":"3",
-       "location_accesss":["ahmedabad","rajkot","mumbai"],
+       "shift_start_time":"10:00",
+       "shift_end_time":"19:00",
+       "week_of" : {
+           "offday1": "Sunday",
+           "offday2": "Saturday",
+           "offday2_applies_to_week": "2nd, 4th",
+           "offday2_type": "halfday"
+                   },
+       "role":"2"
      },
     {
        "name":"john smith" ,
@@ -150,13 +160,15 @@ Now user will need to pass that authentication token & authentication-key in hea
        "gender":"male",
        "location":"ahmedabad",
        "designation":"project manager",
-       "from_time":"10:00:00",
-       "to_time":"19:00:00",
-       "week_of_day1":"7",
-       "week_of_day2":"6",
-       "no_of_weekday":"2,4",
-       "day_type":"1","[1 = full, 2 = half]"
-       "is_admin":"0",
+       "shift_start_time":"10:00",
+       "shift_end_time":"19:00",
+       "week_of" : {
+           "offday1": "Sunday",
+           "offday2": "Saturday",
+           "offday2_applies_to_week": "2nd, 4th",
+           "offday2_type": "halfday"
+                   },
+       "role":"0",
     },
 
   ]
@@ -165,27 +177,26 @@ Now user will need to pass that authentication token & authentication-key in hea
 
 
 #### Success Resposnse
-If the user has entered all the data correctly then they will receive a success response that your data has been synced successfully.
+success response would be "User data has been synced successfully".
 ``` json
 
 {
   "success": true,
   "status_code": 200,
-  "error_code": 0,
   "message": "User has synced successfully." 
 }
 
 ```
 
-#### Response when some of data saved successfully & there was error while saving other: 
-In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has been successfully saved so next time the user only enters a particular object where there was error and again sends the request.
+#### Response when while there is error in saving some data: 
+In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has been synced successfully so next time the user only enters a particular object where there was error and again sends the request.
 
 
 ``` json
 {
-  "Total_count":10,
-  "success_count":5,
-  "error_count": 5,
+  "Total_user_count":10 records,
+  "success_user_count":5 records,
+  "error_user_count": 5 records,
   "description": "There was an error while adding Emp_id please re enter Emp_id for the last 5 entry"
 }
 
