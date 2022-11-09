@@ -90,26 +90,27 @@ If your acccount is not registered then user will get below response.
 ### Instructions:
 * Users can send Maximum 10 records within a single API hit.
 * List of field's which needs to be pass in the payload while calling Api
+* If more than 10 records are initiated at single hit it will throw error .i.e More than 10 records at once was initiated
 
 
 
 | Field | Datatype | Requirements | Description |
 | :--- | :--- | :--- | :--- |
-| Name | varchar(50) | Mandatory | User Name |
-| User Id | int | Mandatory | Unique User ID |
-| Date of joining | varchar(50) | Mandatory | User Name |
-| Email Id | varchar(50) | Mandatory | Email validations |
-| Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 || Mode | boolean() | Mandatory |  
-| Date of Birth | dateTime() | Optional |  |
-| Gender | tinyint(1)  | Optional | 1=Male,2=Female,0=other |
-| Department | varchar(30 | Optional | Name of Department which belongs to the user. |
+| Name | varchar(50) | Mandatory | Enter Full Name|
+| Date of joining | varchar(50) | Mandatory | Enter the Date of Joining of the user|
+| Email| varchar(50) | Mandatory | Enter Email Id for the user |
+| Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
+| Mode | boolean() | Mandatory |  
+| Date of Birth | dateTime() | Optional | Enter Date of birth of the user |
+| Gender | tinyint(1)  | Optional | Male,Female,other |
+| Department | varchar(30 | Optional | Name of Department which belongs to the user.|
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift start time as 24 hrs format in HH:MM |
-| Designation | varchar(30)  | Optional | User designation |
-| Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
-| Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
-| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all     off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
-| Off Day 2 Type | varchar(30) | Optional | 1=Full Day,2=Half Day apply for Week_of_day2.  |
+| Designation | varchar(30)  | Optional | Enter Designation of the user|
+| Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if    all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
+| Off Day 2 Type | varchar(30) | Optional | Full Day, Half Day apply for Week_off_day2|
 | User Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
 
 #### Note: `User Role` parameter & value with description:
@@ -117,9 +118,9 @@ If your acccount is not registered then user will get below response.
 | Parameter | Value | Description |
 | :--- | :--- | :--- |
 | user_role | 0 | Normal User Data |
-| user_role | Other Than 0,2,3 | Provided user_role is not available |
 | user_role | 2 | Sub Admin |
 | user_role | 3 | Supervisor |
+| user_role | Other Than 0,2,3 | Provided user_role is not available|
 
 #### Description
 
@@ -127,11 +128,9 @@ If your acccount is not registered then user will get below response.
 2. Below is the detail explanation about roles:
 
   * Normal User can mark & regularize the attendance 
-  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful       punch notification & can enable or disable successful / Unsuccessful punch notification 
-  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page ( EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card, Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
+  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful       punch     notification & can enable or disable successful / Unsuccessful punch notification 
+  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page (     EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,     Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
-
-
 
 ### Step 1: Pass Authentication Token & authentic-key in the headers:
 Now the user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
@@ -151,8 +150,7 @@ Now the user will need to pass that authentication token & authentication-key in
 {
 "data":[
      {
-       "name":"john smith" ,
-       "user_id":"10000119",
+       "name":"john smith",
        "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-2019",
        "mobile_number":"23092019",
@@ -161,7 +159,7 @@ Now the user will need to pass that authentication token & authentication-key in
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_of" : {
+       "week_off" : {
            "offday1": "Sunday",
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
@@ -181,7 +179,7 @@ Now the user will need to pass that authentication token & authentication-key in
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_of" : {
+       "week_off" : {
            "offday1": "Sunday",
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
@@ -208,7 +206,7 @@ success response would be "User data has been synced successfully".
 ```
 
 #### Response when while there is error in saving some data: 
-In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has been synced successfully so next time the user only enters a particular object where there was error and again sends the request.
+In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has synced successfully so next time the user only send the particular object in which user receives the error.
 
 
 ``` json
@@ -265,9 +263,9 @@ In case any error occurs during sending the request, then the user will be able 
 
 | Error code | Error message| 
 | :--- | :--- |
-| 1 | Please enter user name | 
-| 2 | Please enter user id | 
-| 3 | This user has been already added | 
+| 1 | Please enter user name| 
+| 2 | | 
+| 3 | This user is already added | 
 | 4 | Please enter valid company id | 
 | 5 | Please do not enter more than 50 characters | 
 | 6 | Please enter mode | 
@@ -320,7 +318,7 @@ In case any error occurs during sending the request, then the user will be able 
             "designation":"project manager",
             "shift_start_time":"10:00:00",
             "shift_end_time":"19:00:00",
-            "week_of": {
+            "week_off": {
                "offday1": "Sunday",
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
@@ -340,7 +338,7 @@ In case any error occurs during sending the request, then the user will be able 
           "designation":"project manager",
           "shift_start_time":"10:00:00",
           "shift_end_time":"19:00:00",
-          "week_of":  {
+          "week_off":  {
                "offday1": "Sunday",
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
