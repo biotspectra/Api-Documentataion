@@ -109,7 +109,8 @@ base_url =  https://biotworld.in/api/external
 2. Below is the detail explanation about roles:
 
   * Normal User can mark & regularize the attendance 
-  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management & 
+  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Un-sucessfull punch          	   notification & can enable or disable successful / Un-sucessfull punch notification 
+  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page ( EDIT     USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,         	Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
 
 
@@ -181,7 +182,7 @@ success response would be "User data has been synced successfully".
 ``` json
 
 {
-  "success": true,
+  "status": success,
   "status_code": 200,
   "message": "User has synced successfully." 
 }
@@ -194,9 +195,9 @@ In case any error occurs during sending the request, then the user will be able 
 
 ``` json
 {
-  "Total_user_count":10 records,
-  "success_user_count":5 records,
-  "error_user_count": 5 records,
+  "Total_user_count":10 "records",
+  "success_user_count":5 "records",
+  "error_user_count": 5 "records",
   "description": "There was an error while adding Emp_id please re enter Emp_id for the last 5 entry"
 }
 
@@ -206,36 +207,36 @@ In case any error occurs during sending the request, then the user will be able 
 ``` json
 [
    {
-     "success":true,
+     "status":success,
      "status_code":200,
    },
 
    {
-    "success": false,
+    "status": failed,
     "status_code": 400,
     "error_code": 1
    },
 
   {
-    "success": false,
+    "status": failed,
     "status_code": 400,
     "error_code": 2
   },
   
   {
-    "success": false,
+    "status": failed,
     "status_code": 400,
     "error_code": 3
   },
   
   {
-    "success": false,
+    "status": failed,
     "status_code": 400,
     "error_code": 4
   },
   
   {
-   "success": false,
+   "status": failed,
    "status_code": 400,
    "error_code": 5
   }
@@ -262,16 +263,15 @@ In case any error occurs during sending the request, then the user will be able 
 | 14 | Please enter valid date-format (dd-mm-yyyy) | 
 | 15 | Please enter valid date-format (dd-mm-yyyy) | 
 
-### Events:
-1. It will store the data in the biot database employee master.
-2. It will add a single/multiple user on a single request.
-3. It will not store access related data like finger,  BLE card, face. It will only store from the Biot App.
 
 
 ## 1B) User Synchronization Get Api:
 
-* User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
+* This Api is used get user records from biot account
+
+### Discription:
+* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
+
 
 ``` 
  Method: GET
@@ -333,11 +333,9 @@ In case any error occurs during sending the request, then the user will be able 
 
 ```
 
-### Events:
-1. It will provide registered user data as per biot database.
-2. It will provide data as per passed filter parameter.
 
-### Filteration will perform by the fields that are listed below:
+
+### Record set can be filtered through below parameters:
 
 | Parameters | Type | Description |
 | :--- | :--- | :--- |
@@ -351,7 +349,7 @@ In case any error occurs during sending the request, then the user will be able 
 | designation | string | Response will filtered with given designation  |
 
 
-#### For Single Filteration:
+#### Filter with Single Parameters:
 ```
 1. Name            :  <base_url>/employee?name=rajat&page_number=1
 2. UserID          :  <base_url>/employee?user_id=256&page_number=1
@@ -364,7 +362,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 ```
 
-#### For Multiple Filteration:
+#### Filter with Multiple Parameters:
 ```
 <base_url>/employee?department=IT&designation=manager&page_number=1
 
@@ -373,18 +371,22 @@ In case any error occurs during sending the request, then the user will be able 
 
 
 ## 2) Transaction (punch detail) :
-#### To get Transaction details user need to pass these parameter in the url `transaction_type`, `from_date` & `to_date` with their respective values as shown below
+####  This Api is used to get Transaction details
+####  In order to consume this api `transaction_type`, `transaction_from_date` , `transaction_to_date`, `first_punch_date`, `last_punch_date`, & 'first_in_punch_date`,'first_out_punch_date` are the parameters it will depend on transaction which paremeter need to be used
+
+
 
 ### Step 1: When User pass `transaction_type` as `0`
-* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`.This parameters will help users to get `all` transactions log of the employees between this particular date.
-* User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. 
+  This parameters will get users `All` transactions logs of the user between this particular date.
 
+### Discription:
+* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=0&from_date=1-01-2022&to_date=30-01-2022&page_number=1
+ URL: <base_url>/transactions?transaction_type=0&transaction_from_date=1-01-2022&transaction_to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -423,13 +425,14 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First Punch` & `Last punch` transactions log of the employees between this particular date.
-* User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first punch log & last punch log between this data `1-01-     2022` to `30-01-2022`. This parameters will get users first punch & last punch logs of the user between this particular date.
+
+### Discription:
+* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
  Method: GET
- URL: <base_url>/transactions?transaction_type=1&from_date=1-01-2022&to_date=30-01-2022&page_number=1
+ URL: <base_url>/transactions?transaction_type=1&transaction_from_date=1-01-2022&transaction_to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -462,15 +465,17 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `2`
-* User also need to pass `from_date` & `to_date` parameters in the url with their respective values i.e. if user wants transaction data between `1-01-2022` to `30-01-   2022`. This parameters will help users to get `First In Punch` & `Last out punch` transactions log of the employees between this particular date.
-* User will receive number of records `10` per page
-* User mandatory needs to pass a parameter name `page_number` with their value as `1` or `2` or `3`....n to receive different records per page.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first in punch log & last in punch log between this data     `1-01-2022` to `30-01-2022`. This parameters will get users In/Out punching logs of the user between this particular date.
+
+
+### Discription:
+* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=2&from_date=1-01-2022&to_date=30-01-2022&page_number=1
+ URL: <base_url>/transactions?transaction_type=2&transaction_from_date=1-01-2022&transaction_to_date=30-01-2022&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -501,12 +506,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 ```
 
-### Events:
-1. It will provide data as per data-flag. Single api provides three types of different responses which depend on data-flag. Data flags like 0 = transaction log , 1 =  first and last punch, 2 = First_In and Last_Out punch.
-2. It will provide data as per passed filter parameter.
-
-
-### Filteration will perform by the fields that are listed below:
+### Record set can be filtered through below parameters:
 
 | Parameters | Type | Description |
 | :--- | :--- | :--- |
@@ -518,7 +518,7 @@ In case any error occurs during sending the request, then the user will be able 
 | designation  | string | Response will filtered with given designation  |
 
 
-#### For Single Filteration:
+#### Filter for single Parameter:
 ```
 1. Name            :  <base_url>/employee?name=rajat&page_number=1
 2. UserID          :  <base_url>/employee?user_id=256&page_number=1
@@ -530,17 +530,13 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 
-#### For Multiple Filteration:
+#### Filter for multiple Parameters:
 ```
 <base_url>/transactions?transaction_type=0&department=development&designation=manager&page_number=1
 
 ```
 
 
-### Additional implementation in biot :
-1. Biot admin panel client management menu export all records at a time as of now it will only export on bases on pagination limit.
-2. Add a new report called biot subscription for biot admin panel which will provide data about client subscription plan details.
-3. Add functionality to change owner name from biot admin panel.
 
 
 
