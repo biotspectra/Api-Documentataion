@@ -177,7 +177,7 @@ Now user will need to pass that authentication token & authentication-key in hea
 ```
 
 
-#### Success Resposnse
+#### Success Response
 success response would be "User data has been synced successfully".
 ``` json
 
