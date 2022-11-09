@@ -60,10 +60,28 @@ base_url =  https://biotworld.in/api/external
 ```
 
 #### Error Response
+If Mobile number or password is incorrect then user will get below response.
 ```json
 {
-  "Invalid Credentials"
-  
+  "status": "failed",
+  "status_code": 400,
+  "message": "Invalid Credentials." 
+}
+```
+If your acccount is not active then user will get below response.
+```json
+{
+  "status": "failed",
+  "status_code": 400,
+  "message": "Your account is inactive." 
+}
+```
+If your acccount is not registered then user will get below response.
+```json
+{
+  "status": "failed",
+  "status_code": 400,
+  "message": "Your account is not registered." 
 }
 ```
 
@@ -92,25 +110,25 @@ base_url =  https://biotworld.in/api/external
 | Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
 | Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all     off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
 | Off Day 2 Type | varchar(30) | Optional | 1=Full Day,2=Half Day apply for Week_of_day2.  |
-| Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
+| User Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
 
-#### Note: `Role` parameter & value with description:
+#### Note: `User Role` parameter & value with description:
 
 | Parameter | Value | Description |
 | :--- | :--- | :--- |
-| role | 0 | Normal User Data |
-| role | Other Than 0,2,3 | Provided role is not available |
-| role | 2 | Sub Admin |
-| role | 3 | Supervisor |
+| user_role | 0 | Normal User Data |
+| user_role | Other Than 0,2,3 | Provided user_role is not available |
+| user_role | 2 | Sub Admin |
+| user_role | 3 | Supervisor |
 
 #### Description
 
-1. This Parameter role is used to assign specific roles to users, roles can be either normal user, sub admin or supervisor, Default value for parameter role is            considered as 0 .
+1. This Parameter user_role is used to assign specific roles to users, roles can be either normal user, sub admin or supervisor, Default value for parameter role is considered as 0 .
 2. Below is the detail explanation about roles:
 
   * Normal User can mark & regularize the attendance 
-  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful punch          	 notification & can enable or disable successful / Unsuccessful punch notification 
-  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page ( EDIT     USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,         	Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
+  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful       punch notification & can enable or disable successful / Unsuccessful punch notification 
+  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page ( EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card, Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
 
 
@@ -135,10 +153,10 @@ Now the user will need to pass that authentication token & authentication-key in
      {
        "name":"john smith" ,
        "user_id":"10000119",
-       "date_of_join":"23–09-2019",
+       "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-2019",
        "mobile_number":"23092019",
-       "email_id":"test@gmail.com",
+       "email":"test@gmail.com",
        "gender":"male", 
        "designation":"project manager",
        "shift_start_time":"10:00",
@@ -148,16 +166,16 @@ Now the user will need to pass that authentication token & authentication-key in
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
            "offday2_type": "half day"
-                   },
-       "role":"2"
+        },
+       "user_role":"2"
      },
     {
        "name":"john smith" ,
        "user_id":"10000119",
-       "date_of_join":"23–09-2019",
+       "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-2019",
        "mobile_number":"23092019",
-       "email_id":"test@gmail.com",
+       "email":"test@gmail.com",
        "gender":"male",
        "location":"ahmedabad",
        "designation":"project manager",
@@ -168,8 +186,8 @@ Now the user will need to pass that authentication token & authentication-key in
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
            "offday2_type": "half day"
-                   },
-       "role":"0",
+       },
+       "user_role":"0",
     },
 
   ]
@@ -293,10 +311,10 @@ In case any error occurs during sending the request, then the user will be able 
           {
             "name":"john smith" ,
             "user_id":"10000119",
-            "date_of_join":"23–09-2019",
+            "date_of_joining":"23–09-2019",
             "date_of_birth":"23–09-2019",
             "mobile_number":"23092019",
-            "email_id":"test@gmail.com",
+            "email":"test@gmail.com",
             "gender":"male",
             "department":"development",
             "designation":"project manager",
@@ -307,16 +325,16 @@ In case any error occurs during sending the request, then the user will be able 
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
                "offday2_type": "half day"
-                       },
-            "role":"1",
+             },
+            "user_role":"1",
          },
         {
           "name":"john smith" ,
           "user_id":"10000119",
-          "date_of_join":"23–09-2019",
+          "date_of_joining":"23–09-2019",
           "date_of_birth":"23–09-2019",
           "mobile_number":"23092019",
-          "email_id":"test@gmail.com",
+          "email":"test@gmail.com",
           "gender":"male",
           "department":"development",
           "designation":"project manager",
@@ -327,8 +345,8 @@ In case any error occurs during sending the request, then the user will be able 
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
                "offday2_type": "half day"
-                      },
-          "role":"0",
+          },
+          "user_role":"0",
          },
 
       ]
@@ -348,7 +366,7 @@ In case any error occurs during sending the request, then the user will be able 
 | date_of_joining | string | Response will filtered with given date_of_joining  |
 | date_of_birth | string | Response will filtered with given date_of_birth |
 | mobile_number | integer | Response will filtered with given mobile_number |
-| email_id  | string | Response will filtered with given email_id  |
+| email  | string | Response will filtered with given email  |
 | department  | string | Response will filtered with given department  |
 | designation | string | Response will filtered with given designation  |
 
@@ -357,10 +375,10 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 1. Name            :  <base_url>/employee?name=rajat&page_number=1
 2. UserID          :  <base_url>/employee?user_id=256&page_number=1
-3. Date of Joining :  <base_url>/employee?date_of_join=22-11-2020&page_number=1
+3. Date of joining :  <base_url>/employee?date_of_joining=22-11-2020&page_number=1
 4. Date of birth   :  <base_url>/employee?date_of_birth=11-05-1994&page_number=1
 5. Mobile number   :  <base_url>/employee?mobile_number=8469368525&page_number=1
-6. Email id        :  <base_url>/employee?email_id=rajat@gmail.com&page_number=1 
+6. Email           :  <base_url>/employee?email=rajat@gmail.com&page_number=1 
 7. Department      :  <base_url>/employee?department=development&page_number=1
 8. Designation     :  <base_url>/employee?designation=manager&page_number=1
 
@@ -376,13 +394,13 @@ In case any error occurs during sending the request, then the user will be able 
 
 ## 2) Transaction (punch detail) :
 ####  This Api is used to get Transaction details
-####  In order to consume this api `transaction_type`, `transaction_from_date` , `transaction_to_date`, `first_punch_date`, `last_punch_date`, & 'first_in_punch_date`,'first_out_punch_date` are the parameters it will depend on transaction which parameter need to be used
+####  In order to consume this api transaction_type, transaction_from_date, transaction_to_date, & attendance_date are the parameters.
 
 
 
 ### Step 1: When User pass `transaction_type` as `0`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to `30-01-2022`. 
-  This parameters will get users `All` transactions logs of the user between this particular date.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to   `30-01-2022`. This parameters will get users `All` transactions logs of the user between this particular date.
+* `transaction_from_date` & `transaction_to_date` parameters not mandatory. 
 
 ### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
@@ -410,7 +428,7 @@ In case any error occurs during sending the request, then the user will be able 
             "designation":"project manager",
             "date":"2022-10-27",
             "time":"10:00:00",	
-            "io flag":"i"
+            "punch_flag":"IN"
              
  	  },
              
@@ -421,7 +439,7 @@ In case any error occurs during sending the request, then the user will be able 
               "designation":"project manager",
               "date":"2022-10-27",
               "time":"19:00:00",	
-              "io flag":"o"
+              "punch_flag":"OUT"
 	      
  	  }
        ]
@@ -429,7 +447,7 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* Users need to pass transaction_from_date & transaction_to_date parameters in the url i.e. if the user wants first punch log & last punch log between this date 1- 01-   2022 to 30-01-2022. These parameters will get users first punch & last punch logs of the user between this particular date.
+* Users need to pass attendance_date parameters in the url i.e. if the user wants first punch log & last punch log between this date 1- 01-   2022 to 30-01-2022. These parameters will get users first punch & last punch logs of the user between this particular date.
 
 ### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
