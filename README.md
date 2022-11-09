@@ -1,12 +1,12 @@
 
 # Third Party API Integrations
 
-We've written a quick step-by-step guide to walk you through how to login inside Biot user panel, make your first API call inside your system, and interpret the results.
+We've written a quick step-by-step guide to walk you through how to login inside the Biot user panel, make your first API call inside your system, and interpret the results.
 
 
 ## Introduction
 
-This Api service will help users to synchronize their data with biot & fetch that data into their own system. For this we have created various Api services where user can purchase services as per their requierment and get acccess towards it. To learn more about this we have created step by step guide where user will get to learn how to integrate this Api with their system. To Know more About this, [Please Contact Our Team](https://biotworld.in/general-inquiry-biot/).
+This Api service will help users to synchronize their data with biot & fetch that data into their own system. For this we have created various Api services where users can purchase services as per their requirement and get access towards it. To learn more about this we have created a step by step guide where users will get to learn how to integrate this Api with their system. To Know more About this, [Please Contact Our Team](https://biotworld.in/general-inquiry-biot/).
 
 
 <p align="center">
@@ -85,14 +85,14 @@ base_url =  https://biotworld.in/api/external
 | Date of Birth | dateTime() | Optional |  |
 | Gender | tinyint(1)  | Optional | 1=Male,2=Female,0=other |
 | Department | varchar(30 | Optional | Name of Department which belongs to the user. |
-| Shift Start Time | dateTime() | Optional | Shift Start Time user need to ptovide shift start time as 24hrs format in HH:MM |
-| Shift End Time | dateTime() | Optional |  Shift End Time user need to ptovide shift start time as 24hrs format in HH:MM |
+| Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
+| Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Designation | varchar(30)  | Optional | User designation |
 | Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
 | Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e.1=Monday,2=Tuesday,3=Wednesday,4=Thursday,5=Friday,6=Saturday,7=Sunday |
 | Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all     off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
 | Off Day 2 Type | varchar(30) | Optional | 1=Full Day,2=Half Day apply for Week_of_day2.  |
-| Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisior |
+| Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
 
 #### Note: `Role` parameter & value with description:
 
@@ -101,22 +101,22 @@ base_url =  https://biotworld.in/api/external
 | role | 0 | Normal User Data |
 | role | Other Than 0,2,3 | Provided role is not available |
 | role | 2 | Sub Admin |
-| role | 3 | Supervisior |
+| role | 3 | Supervisor |
 
 #### Description
 
-1. This Parameter `role` is used to assign specific role to user, roles can be either normal user, sub admin or supervisior, Default value for parameter role is          considered as 0 .
+1. This Parameter role is used to assign specific roles to users, roles can be either normal user, sub admin or supervisor, Default value for parameter role is            considered as 0 .
 2. Below is the detail explanation about roles:
 
   * Normal User can mark & regularize the attendance 
-  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Un-sucessfull punch          	   notification & can enable or disable successful / Un-sucessfull punch notification 
+  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful punch          	 notification & can enable or disable successful / Unsuccessful punch notification 
   * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page ( EDIT     USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,         	Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
 
 
 
 ### Step 1: Pass Authentication Token & authentic-key in the headers:
-Now user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
+Now the user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
 
 ```
  Method: POST
@@ -147,7 +147,7 @@ Now user will need to pass that authentication token & authentication-key in hea
            "offday1": "Sunday",
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "halfday"
+           "offday2_type": "half day"
                    },
        "role":"2"
      },
@@ -167,7 +167,7 @@ Now user will need to pass that authentication token & authentication-key in hea
            "offday1": "Sunday",
            "offday2": "Saturday",
            "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "halfday"
+           "offday2_type": "half day"
                    },
        "role":"0",
     },
@@ -306,7 +306,7 @@ In case any error occurs during sending the request, then the user will be able 
                "offday1": "Sunday",
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
-               "offday2_type": "halfday"
+               "offday2_type": "half day"
                        },
             "role":"1",
          },
@@ -326,7 +326,7 @@ In case any error occurs during sending the request, then the user will be able 
                "offday1": "Sunday",
                "offday2": "Saturday",
                "offday2_applies_to_week": "2nd, 4th",
-               "offday2_type": "halfday"
+               "offday2_type": "half day"
                       },
           "role":"0",
          },
@@ -344,7 +344,7 @@ In case any error occurs during sending the request, then the user will be able 
 | Parameters | Type | Description |
 | :--- | :--- | :--- |
 | name  | string | Response will filtered with given name  |
-| user_id | string | Response will filtered with given userid  |
+| user_id | string | Response will filtered with given user_id  |
 | date_of_joining | string | Response will filtered with given date_of_joining  |
 | date_of_birth | string | Response will filtered with given date_of_birth |
 | mobile_number | integer | Response will filtered with given mobile_number |
@@ -376,7 +376,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 ## 2) Transaction (punch detail) :
 ####  This Api is used to get Transaction details
-####  In order to consume this api `transaction_type`, `transaction_from_date` , `transaction_to_date`, `first_punch_date`, `last_punch_date`, & 'first_in_punch_date`,'first_out_punch_date` are the parameters it will depend on transaction which paremeter need to be used
+####  In order to consume this api `transaction_type`, `transaction_from_date` , `transaction_to_date`, `first_punch_date`, `last_punch_date`, & 'first_in_punch_date`,'first_out_punch_date` are the parameters it will depend on transaction which parameter need to be used
 
 
 
@@ -384,7 +384,7 @@ In case any error occurs during sending the request, then the user will be able 
 * User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to `30-01-2022`. 
   This parameters will get users `All` transactions logs of the user between this particular date.
 
-### Discription:
+### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
@@ -429,9 +429,9 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first punch log & last punch log between this date `1-       01-2022` to `30-01-2022`. This parameters will get users first punch & last punch logs of the user between this particular date.
+* Users need to pass transaction_from_date & transaction_to_date parameters in the url i.e. if the user wants first punch log & last punch log between this date 1- 01-   2022 to 30-01-2022. These parameters will get users first punch & last punch logs of the user between this particular date.
 
-### Discription:
+### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
@@ -468,11 +468,11 @@ In case any error occurs during sending the request, then the user will be able 
 
 ```
 
-### Step 2: When User pass `transaction_type` as `2`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first in punch log & last in punch log between this date     `1-01-2022` to `30-01-2022`. This parameters will get users In/Out punching logs of the user between this particular date.
+### Step 3: When User pass `transaction_type` as `2`
+* Users need to pass transaction_from_date & transaction_to_date parameters in the url i.e. if the user wants first in punch log & last in punch log between this date   1-01-2022 to 30-01-2022. These parameters will get users In/Out punching logs of the user between this particular date.
 
 
-### Discription:
+### Description:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 
