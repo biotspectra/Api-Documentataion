@@ -377,7 +377,7 @@ In case any error occurs during sending the request, then the user will be able 
 
 
 ### Step 1: When User pass `transaction_type` as `0`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction data between `1-01-2022` to `30-01-2022`. 
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to `30-01-2022`. 
   This parameters will get users `All` transactions logs of the user between this particular date.
 
 ### Discription:
@@ -425,7 +425,7 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first punch log & last punch log between this data `1-01-     2022` to `30-01-2022`. This parameters will get users first punch & last punch logs of the user between this particular date.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first punch log & last punch log between this date `1-       01-2022` to `30-01-2022`. This parameters will get users first punch & last punch logs of the user between this particular date.
 
 ### Discription:
 * `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
@@ -465,7 +465,7 @@ In case any error occurs during sending the request, then the user will be able 
 ```
 
 ### Step 2: When User pass `transaction_type` as `2`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first in punch log & last in punch log between this data     `1-01-2022` to `30-01-2022`. This parameters will get users In/Out punching logs of the user between this particular date.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user want first in punch log & last in punch log between this date     `1-01-2022` to `30-01-2022`. This parameters will get users In/Out punching logs of the user between this particular date.
 
 
 ### Discription:
