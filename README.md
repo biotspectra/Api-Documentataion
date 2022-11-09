@@ -182,7 +182,7 @@ success response would be "User data has been synced successfully".
 ``` json
 
 {
-  "status": success,
+  "status": "success",
   "status_code": 200,
   "message": "User has synced successfully." 
 }
@@ -207,7 +207,7 @@ In case any error occurs during sending the request, then the user will be able 
 ``` json
 [
    {
-     "status":success,
+     "status":"success",
      "status_code":200,
    },
 
@@ -218,25 +218,25 @@ In case any error occurs during sending the request, then the user will be able 
    },
 
   {
-    "status": failed,
+    "status": "failed",
     "status_code": 400,
     "error_code": 2
   },
   
   {
-    "status": failed,
+    "status": "failed",
     "status_code": 400,
     "error_code": 3
   },
   
   {
-    "status": failed,
+    "status": "failed",
     "status_code": 400,
     "error_code": 4
   },
   
   {
-   "status": failed,
+   "status": "failed",
    "status_code": 400,
    "error_code": 5
   }
