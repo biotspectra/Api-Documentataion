@@ -300,13 +300,15 @@ In case any error occurs during sending the request, then the user will be able 
             "gender":"male",
             "department":"development",
             "designation":"project manager",
-            "from_time":"10:00:00",
-            "to_time":"19:00:00",
-            "week_of_day1":"7",
-            "week_of_day2":"6",
-            "no_of_weekday":"2,4",
-            "day_type":"1", "[1 = full, 2 = half]"
-            "is_admin":"1",
+            "shift_start_time":"10:00:00",
+            "shift_end_time":"19:00:00",
+            "week_of": {
+               "offday1": "Sunday",
+               "offday2": "Saturday",
+               "offday2_applies_to_week": "2nd, 4th",
+               "offday2_type": "halfday"
+                       },
+            "role":"1",
          },
         {
           "name":"john smith" ,
@@ -318,13 +320,15 @@ In case any error occurs during sending the request, then the user will be able 
           "gender":"male",
           "department":"development",
           "designation":"project manager",
-          "from_time":"10:00:00",
-          "to_time":"19:00:00",
-          "week_of_day1":"7",
-          "week_of_day2":"6",
-          "no_of_weekday":"2,4",
-          "day_type":"1", "[1 = full, 2 = half]"
-          "is_admin":"0",
+          "shift_start_time":"10:00:00",
+          "shift_end_time":"19:00:00",
+          "week_of":  {
+               "offday1": "Sunday",
+               "offday2": "Saturday",
+               "offday2_applies_to_week": "2nd, 4th",
+               "offday2_type": "halfday"
+                      },
+          "role":"0",
          },
 
       ]
