@@ -646,14 +646,14 @@ The following endpoint retrieves the details of all the transaction log from bio
 {
 "data":[
  	  {
-             "user_id":"10000119",
+             "user_id":"10001",
              "name":"john smith",
              "department":"development",
              "designation":"project manager",
-             "first_punch_date":"2022-10-27",
+             "first_punch_date":"2022-01-01",
              "first_punch_time":"10:00:00",	
              "first_punch_device_id":"5d44",
-             "last_punch_date":"2022-10-27",
+             "last_punch_date":"2022-01-01",
              "last_punch_time":"19:00:00",	
              "last_punch_device_id":"5d55",
              "shift_start_time": "10:00:00 ",
@@ -686,15 +686,15 @@ The following endpoint retrieves the details of all the transaction log from bio
 {
 "data":[
 	 {
-             "user_id":"10000119",
+             "user_id":"10001",
              "name":"john smith",
              "department":"development",
              "designation":"project manager",
-             "first_in_date":"2022-10-27",
+             "first_in_date":"2022-01-01",
              "first_in_time":"10:00:00",	
              "first_in_device_id":"5d44",
-             "last_out_date":"2022-10-27",
-             "last_out_time":"19:00:00",	
+             "last_out_date":"2022-01-01",
+             "last_out_time":"18:00:00",	
              "last_out_device_id":"5d55",
           }
 	]
