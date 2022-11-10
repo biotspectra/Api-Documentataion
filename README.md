@@ -1,7 +1,7 @@
 
 # Third Party API Integrations
 
-We've written a quick step-by-step guide to walk you through how to login inside the Biot user panel, make your first API call inside your system, and interpret the results.
+We've written a quick step-by-step guide to walk you through how to login using our Login api, make your first API call inside your system, and interpret the results.
 
 
 ## Introduction
@@ -109,14 +109,14 @@ If your acccount is not registered then user will get below response.
 | Mobile No  | varchar(15)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
 | Date of Birth | dateTime() | Optional | Enter Date of birth of the user |
 | Gender | varchar(50) | Optional | Male,Female,other |
-| Department | varchar(30) | Optional | Name of Department which belongs to the user.|
+| Department | varchar(50) | Optional | Name of Department which belongs to the user.|
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
-| Designation | varchar(30)  | Optional | Enter Designation of the user|
-| Off Day 1 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
-| Off Day 2 Type | varchar(30) | Optional | Full Day, Half Day (apply for Week_off_day2) |
+| Designation | varchar(50)  | Optional | Enter Designation of the user|
+| Off Day 1 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 Applies To Week | varchar(50) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
+| Off Day 2 Type | varchar(50) | Optional | Full Day, Half Day (apply for Week_off_day2) |
 | User Role | int[1] | Optional | Pass 0=Normal User, 3=Supervisor |
 
 #### Note: `User Role` parameter & value with description:
@@ -157,7 +157,8 @@ Now the user will need to pass that token which you have generated while login &
 "data":[
      {
        "name":"john smith",
-       "date_of_joining":"23–09-2019",
+       "user_id":"10000119214",
+       "date_of_joining":"23–09-2020",
        "date_of_birth":"23–09-1999",
        "mobile_number":"2309201912",
        "email":"john@gmail.com",
@@ -175,7 +176,8 @@ Now the user will need to pass that token which you have generated while login &
        "user_role":"0"
      },
     {
-       "name":"Kriti Kumari" ,
+       "name":"Kriti Kumari",
+       "user_id":"10000119215",
        "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-1998",
        "mobile_number":"2309201922",
@@ -219,8 +221,7 @@ In case any error occurs during sending the request, then the user will be able 
 {
   "Total_user_count":10 "records",
   "success_user_count":5 "records",
-  "error_user_count": 5 "records",
-  "description": "There was an error while adding Emp_id please re enter Emp_id for the last 5 entry"
+  "error_user_count": 5 "records"
 }
 
 
@@ -269,14 +270,16 @@ In case any error occurs during sending the request, then the user will be able 
 
 | Error code | Error message| Cause | Solution
 | :--- | :--- | :--- | :--- |
-| 1 | The {input field} is required .i.e. {name,mobile number and so on}  | A mandatory field is empty | Ensure all mandatory fields and values are present.|
-| 2 | Data Already Exist | An existing user record has been passed .i.e {name,email,mobile number} | Ensure that a unique user record is passed |
+| 1 | The {input field} is required .i.e. {name,mobile number,department,user id, email and so on}  | A mandatory field is empty | Ensure all mandatory fields and values are present.|
+| 2 | Data Already Exist | An existing user record has been passed .i.e {email,mobile number} | Ensure that a unique user email & mobile number is passed |
 | 3 | Please enter valid company id | Invalid Company Id has passed | Ensure that valid company Id is passed |
-| 4 | Please do not enter more than 50 characters | User have passed more than 50 characters .i.e {name,email,department,designation} | Ensure that less than 50 characters are passed |
-| 5 | Please enter valid email_id | Email Id format is not valid | Email id should be {example@mail.com} |
-| 6 | Mobile Number should consist 10 digits only| Email Id format is not valid | Email id should be {+91 9988776655} |
+| 4 | Please do not enter more than 50 characters | User have passed more than 50 characters .i.e {name,email,department,designation,gender,offday1,offday2,offday2 applies to week,offday2 type} | Ensure that less than 50 characters are passed |
+| 5 | Please enter valid email | Email format is not valid | Email should be {example@mail.com} |
+| 6 | Maximum Limit Exceeded for Mobile Number| Mobile number limit exceeded above 15 | Ensure that 15 digits are passed  |
 | 7 | Please enter valid date-format  | {date of joining / date of birth } format is not valid | Date format should be (dd-mm-yyyy) |
-| 8 | Please enter valid start/end shift time | {shift start time / shift end time } format is not valid | Start/end shift should be in 24 hrs format in HH:MM |
+| 8 | Please enter valid start/end shift time | {shift start time / shift end time } format is not valid | Start/end shift should be in 24 hrs format in HH:MM|
+| 9 | Provided user_role is not available | Only 1 & 3 user role value is allowed | Ensure that only 1(normal user) & 3(supervisior) role is passed |
+| 10 | User Limit Exceeded| Users can send Maximum 10 records within a single API hit | Ensure that you don't send more than 10 records |
 
 
 
@@ -286,19 +289,26 @@ In case any error occurs during sending the request, then the user will be able 
 ### Instructions 
 *  Default user will able to retrieves 10 records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `user_id` will be unique & auto generated.
-*  To fetch particular user data user need to pass `user_id` as parameter. 
-*  when fetching particular user data no need to pass `page_number` as parameter.
+* `number_of_records` parameter is optional .i.e {number_of_records=100} depends on how many records user wants, minimum records is 10 & maximum is 100.
 
 
 ### Description:
 * The following endpoint retrieves the details of all the user data from biot account.
 
-
-
+#### Default 10 records will retrieve
 ``` 
  Method: GET
- URL: <base_url>/employee?page_number=1 (when want all user record) | <base_url>/employee/10000119
+ URL: <base_url>/employee?page_number=1
+ Header: 
+"token": <jwt token>,
+"authentic-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+#### When Number of records is 100 (Maximum)
+``` 
+ Method: GET
+ URL: <base_url>/employee?page_number=1&number_of_records=100
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -317,7 +327,7 @@ In case any error occurs during sending the request, then the user will be able 
             "date_of_joining":"23–09-2019",
             "date_of_birth":"23–09-2000",
             "mobile_number":"2309201909",
-            "email":"test@gmail.com",
+            "email":"john@gmail.com",
             "gender":"male",
             "department":"development",
             "designation":"project manager",
@@ -329,16 +339,16 @@ In case any error occurs during sending the request, then the user will be able 
                "offday2_applies_to_week": "2nd, 4th",
                "offday2_type": "half day"
              },
-            "user_role":"2",
+            "user_role":"3",
          },
         {
-          "name":"john smith" ,
-          "user_id":"10000119",
-          "date_of_joining":"23–09-2019",
+          "name":"riya joshi" ,
+          "user_id":"10000120",
+          "date_of_joining":"23–09-2021",
           "date_of_birth":"23–09-2000",
           "mobile_number":"2309201998",
-          "email":"test@gmail.com",
-          "gender":"male",
+          "email":"riya@gmail.com",
+          "gender":"female",
           "department":"development",
           "designation":"project manager",
           "shift_start_time":"10:00:00",
@@ -392,25 +402,24 @@ In case any error occurs during sending the request, then the user will be able 
 <base_url>/employee?department=IT&designation=manager&page_number=1
 
 ```
+
 #### Error Response & their failure cases are shown below:
 | Error message| Cause | Solution
 | :--- | :--- | :--- |
-| The user id provided does not exist | The User Id does not belong to the requestor, or it doesn't exist. | Ensure that the User id is valid and belongs to the requestor.|
+| No Data Available | The {User Id,Date of joining,Date of birth,Mobile number,Email,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that valid endpoint is passed and belongs to the requestor.|
 
 
 
 ## 1c) User Synchronization Edit Api:
 * This Api is used to Edit User records from Biot account.
-* In order to consume this api `user_id` is the parameter
-* User id value should be pass in the url 
 
 ### Description:
-The following endpoint edits the user details such as the name, email, date_of_joining and so on.
+The following endpoint edits the user details such as the name, email, date_of_joining and so on. If user passes same `User Id` with different records then the record for the particular user will be updated.
 
 
 ```
  Method: POST
- URL: <base_url>/employee/10000119
+ URL: <base_url>/user
  Header: 
 "token": <jwt token>,
 "authentication-key": <client will get it from their email>,
@@ -420,16 +429,52 @@ The following endpoint edits the user details such as the name, email, date_of_j
 
 #### Request 
 ``` json
-"data":
+{
+"data":[
      {
-       "name":"john smiths",
-       "date_of_joining":"23–09-2017",
+       "name":"johns smith",
+       "user_id":"10000119214",
+       "date_of_joining":"23–09-2020",
        "date_of_birth":"23–09-1999",
        "mobile_number":"2309201912",
-       "email":"john@gmail.com"
-     }
-     
- ```
+       "email":"john@gmail.com",
+       "department":"software",
+       "gender":"male", 
+       "designation":"project manager",
+       "shift_start_time":"10:00",
+       "shift_end_time":"19:00",
+       "week_off" : {
+           "offday1": "Sunday",
+           "offday2": "Saturday",
+           "offday2_applies_to_week": "2nd, 4th",
+           "offday2_type": "half day"
+        },
+       "user_role":"0"
+     },
+    {
+       "name":"Kiran Kumari",
+       "user_id":"10000119215",
+       "date_of_joining":"23–09-2019",
+       "date_of_birth":"23–09-1998",
+       "mobile_number":"2309201922",
+       "email":"Kiran@gmail.com",
+       "department":"software",
+       "gender":"female",
+       "designation":"project manager",
+       "shift_start_time":"10:00",
+       "shift_end_time":"19:00",
+       "week_off" : {
+           "offday1": "Sunday",
+           "offday2": "Saturday",
+           "offday2_applies_to_week": "2nd, 4th",
+           "offday2_type": "half day"
+       },
+       "user_role":"3",
+    },
+
+  ]
+}
+```
  
  #### Success Response
 ```json
@@ -441,8 +486,12 @@ The following endpoint edits the user details such as the name, email, date_of_j
    }
 }
 
-
 ```
+
+
+| Error code | Error message| Cause | Solution
+| :--- | :--- | :--- | :--- |
+| 2 | Data Already Exist | An existing user record has been passed .i.e {email,mobile number} | Ensure that a unique user email & mobile number is passed |
 
 
 
@@ -451,17 +500,41 @@ The following endpoint edits the user details such as the name, email, date_of_j
 
 
 ## 2) Transaction (punch detail) :
-####  This Api is used to get Transaction details
-####  In order to consume this api transaction_type, transaction_from_date, transaction_to_date, & attendance_date are the parameters.
+The following endpoint retrieves the details of all the transaction log from biot account.
+
+### Instructions 
+*  Default user will able to retrieves 10 records per page.
+* `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
+* `number_of_records` parameter is optional .i.e {number_of_records=100} depends on how many records user wants, minimum records is 10 & maximum is 100.
+*  In order to consume this transaction's api transaction_type, transaction_from_date, transaction_to_date, attendance_from_date,attendance_to_date & transaction_id      are the parameters that will be used throughout this transaction api.
+
+
+### Description: 
+* Transaction Type : When transaction_type is passed as `0` then all the transaction logs will be retrieve, when passed as `1` then First punch & Last Punch user wise   records will be retrieved, when passed as `2` then First In Punch & Last Out Punch user wise records will be retrieved & when passed as `3` then latest transaction     log will retrieved based on requested transaction_id .
+* Transaction Id : Transaction Id is unique number which is auto generated for each and every transaction logs.
+
+### Example 1 ###
+* All Transaction Logs:
+
+```
+
+| Transaction ID | User Id | Transaction DateTime | In Out Flag |
+| :--- | :--- | :--- | :--- |
+| 1 | 10001 | 2022-01-01 10:00:00 | I |
+| 2 | 10001 | 2022-01-01 11:00:00 | O |
+| 3 | 10002 | 2022-01-01 11:00:00 | I |
+
+
+
+```
+
 
 
 
 ### Step 1: When User pass `transaction_type` as `0`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to   `30-01-2022`. This parameters will get users `All` transactions logs of the user between this particular date.
+* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to `30-01-2022`.     This parameters will get users `All` transactions logs of the user between this particular date.
 * `transaction_from_date` & `transaction_to_date` parameters not mandatory. 
 
-### Description:
-* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 ``` 
 
@@ -508,8 +581,7 @@ The following endpoint edits the user details such as the name, email, date_of_j
 * Users need to pass attendance_date parameter in the url these parameters will get users first punch & last punch logs.
 * `attendance_date` parameters are mandatory. 
 
-### Description:
-* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
+
 
 ``` 
  Method: GET
@@ -549,9 +621,6 @@ The following endpoint edits the user details such as the name, email, date_of_j
 * Users need to pass attendance_date parameter in the url these parameters will get users first in punch & last out punch logs.
 * `attendance_date` parameters are mandatory. 
 
-
-### Description:
-* `page_number` parameter is mandatory in order to consume this api .i.e.  `1` or `2` or `3`....n to receive different records per page.
 
 
 ``` 
