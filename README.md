@@ -503,9 +503,9 @@ The following endpoint edits the user details such as the name, email, date_of_j
 The following endpoint retrieves the details of all the transaction log from biot account.
 
 ### Instructions 
-*  Default user will able to retrieves 10 records per page.
+*  Default user will able to retrieves 100 records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `number_of_records` parameter is optional .i.e {number_of_records=100} depends on how many records user wants, minimum records is 10 & maximum is 100.
+* `number_of_records` parameter is optional .i.e {number_of_records=1000} depends on how many records user wants, minimum records is 100 & maximum is 1000.
 *  In order to consume this transaction's api transaction_type, transaction_from_date, transaction_to_date, attendance_from_date,attendance_to_date & transaction_id      are the parameters that will be used throughout this transaction api.
 
 
@@ -769,6 +769,9 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 ```
 
+
+
+
 ### Record set can be filtered through below parameters:
 
 | Parameters | Type | Description |
@@ -798,8 +801,12 @@ The following endpoint retrieves the details of all the transaction log from bio
 <base_url>/transactions?transaction_type=0&department=development&designation=manager&page_number=1
 
 ```
-
-
+#### Error Response & their failure cases are shown below:
+| Error message| Cause | Solution
+| :--- | :--- | :--- |
+| No Data Available | The {User Id,Device id ,Date ,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that valid endpoint is passed and belongs to the requestor.|		    
+			    
+			
 
 
 
