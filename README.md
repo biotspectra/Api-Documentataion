@@ -101,8 +101,9 @@ If your acccount is not registered then user will get below response.
 | Email| varchar(50) | Mandatory | Enter Email Id for the user |
 | Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
 | Date of Birth | dateTime() | Optional | Enter Date of birth of the user |
-| Gender | tinyint(1)  | Optional | Male,Female,other |
-| Department | varchar(30 | Optional | Name of Department which belongs to the user.|
+| Gender | varchar(50) | Optional | Male,Female,other |
+| User Mode | tinyint(1)  | Mandatory | 1= Access, 2= Attendance, 3=Both |
+| Department | varchar(30) | Optional | Name of Department which belongs to the user.|
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
 | Designation | varchar(30)  | Optional | Enter Designation of the user|
