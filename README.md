@@ -711,7 +711,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 ``` 
 
  Method: GET
- URL: <base_url>/transactions?transaction_type=3&transaction_id=3&page_number=1
+ URL: <base_url>/transactions?transaction_type=3&transaction_id=6&page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -719,50 +719,82 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 ```
 
-#### Response for Transaction log (when transaction_type == 2): 
+#### Response for Transaction log (when transaction_type == 3 & transaction_id == 6): 
 
 ``` json
 {
 "data":[
 	 {
-             "user_id":"10000119",
-	     "transaction_type":"4",
-             "name":"john smith",
+            "user_id":"10001",
+	    "transaction_id":"7",
+            "name":"john smith",
+            "department":"development",
+            "designation":"project manager",
+            "date":"2022-01-01",
+            "time":"15:00:00",	
+            "in_out_flag":"OUT"
+             
+ 	  },
+             
+          {
+              "user_id":"10001",
+	      "transaction_id":"8",
+              "name":"John Doe",
+              "department":"development",
+              "designation":"project manager",
+              "date":"2022-01-01",
+              "time":"16:00:00",	
+              "in_out_flag":"IN"
+	      
+ 	  },
+	  
+	 {
+             "user_id":"10002",
+	     "transaction_id":"9",
+             "name":"Henry Klaseen",
              "department":"development",
              "designation":"project manager",
-             "first_in_date":"2022-10-27",
-             "first_in_time":"10:00:00",	
-             "first_in_device_id":"5d44",
-             "last_out_date":"2022-10-27",
-             "last_out_time":"19:00:00",	
-             "last_out_device_id":"5d55",
-          },
-	   {
-             "user_id":"10000119",
-	     "transaction_type":"5",
-             "name":"Dwyane smith",
+             "date":"2022-01-01",
+             "time":"17:00:00",	
+             "in_out_flag":"OUT"
+	      
+ 	 },
+	  {
+            "user_id":"10001",
+	    "transaction_id":"10",
+            "name":"john smith",
+            "department":"development",
+            "designation":"project manager",
+            "date":"2022-01-01",
+            "time":"18:00:00",	
+            "in_out_flag":"OUT"
+             
+ 	  },
+             
+          {
+              "user_id":"10001",
+	      "transaction_id":"11",
+              "name":"John Doe",
+              "department":"development",
+              "designation":"project manager",
+              "date":"2022-01-01",
+              "time":"19:00:00",	
+              "in_out_flag":"IN"
+	      
+ 	  },
+	  
+	 {
+             "user_id":"10003",
+	     "transaction_id":"12",
+             "name":"Henry Klaseen",
              "department":"development",
              "designation":"project manager",
-             "first_in_date":"2022-10-27",
-             "first_in_time":"10:00:00",	
-             "first_in_device_id":"5d44",
-             "last_out_date":"2022-10-27",
-             "last_out_time":"19:00:00",	
-             "last_out_device_id":"5d55",
-          },
-	   {
-             "user_id":"10000119",
-	     "transaction_type":"6",
-             "name":"john smith",
-             "department":"development",
-             "designation":"project manager",
-             "first_in_date":"2022-10-27",
-             "first_in_time":"10:00:00",	
-             "first_in_device_id":"5d44",
-             "last_out_date":"2022-10-27",
-             "last_out_time":"19:00:00",	
-             "last_out_device_id":"5d55",
-          }
+             "date":"2022-01-01",
+             "time":"19:00:00",	
+             "in_out_flag":"IN"
+	      
+ 	 }
+	 
 	]
 }
 
