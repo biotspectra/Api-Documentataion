@@ -516,17 +516,38 @@ The following endpoint retrieves the details of all the transaction log from bio
 ### Example 1 ###
 * All Transaction Logs:
 
-```
-
 | Transaction ID | User Id | Transaction DateTime | In Out Flag |
 | :--- | :--- | :--- | :--- |
 | 1 | 10001 | 2022-01-01 10:00:00 | I |
 | 2 | 10001 | 2022-01-01 11:00:00 | O |
 | 3 | 10002 | 2022-01-01 11:00:00 | I |
+| 4 | 10001 | 2022-01-01 12:00:00 | I |
+| 5 | 10002 | 2022-01-01 13:00:00 | O |
+| 6 | 10002 | 2022-01-01 14:00:00 | I |
+| 7 | 10001 | 2022-01-01 15:00:00 | O |
+| 8 | 10001 | 2022-01-01 16:00:00 | I |
+| 9 | 10002 | 2022-01-01 17:00:00 | O |
+| 10 | 10001 | 2022-01-01 18:00:00 | O |
+| 11 | 10001 | 2022-01-01 19:00:00 | I |
+
+### Example 2 ###
+* First Punch & Last Punch Logs:
+
+|  User Id | First Punch DateTime |Last Punch DateTime |
+| :--- | :--- | :--- |
+| 10001 | 2022-01-01 10:00:00 | 2022-01-01 19:00:00 |
+| 10002 | 2022-01-01 11:00:00 | 2022-01-01 17:00:00 |
 
 
+### Example 2 ###
+* First IN & Last OUT Punch Logs:
 
-```
+|  User Id | First IN DateTime |Last OUT DateTime |
+| :--- | :--- | :--- |
+| 10001 | 2022-01-01 10:00:00 | 2022-01-01 18:00:00 |
+| 10002 | 2022-01-01 11:00:00 | 2022-01-01 17:00:00 |
+
+
 
 
 
