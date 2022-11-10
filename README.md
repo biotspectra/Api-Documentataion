@@ -59,7 +59,7 @@ base_url =  https://biotworld.in/api/external
 ```
 
 #### Error Response
-If Mobile number or password is incorrect then user will get below response.
+If Mobile number or auth key is incorrect then user will get below response.
 ```json
 {
   "status": "failed",
@@ -94,8 +94,8 @@ If your acccount is not registered then user will get below response.
 
 ## 1A) User Synchronization Post Api
 ### Instructions:
-* Users can send Maximum 10 records within a single API hit.
-* If more than 10 records are initiated at single hit it will throw error .i.e More than 10 records at once is initiated
+* Users can send Maximum `10` records within a single API hit.
+* If more than `10` records are initiated at single hit it will throw error .i.e More than `10` records at once is initiated
 
 
 
@@ -287,9 +287,9 @@ In case any error occurs during sending the request, then the user will be able 
 ## 1B) User Synchronization Get Api:
 
 ### Instructions 
-*  Default user will able to retrieves 10 records per page.
+*  Default user will able to retrieves `10` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `number_of_records` parameter is optional .i.e {number_of_records=100} depends on how many records user wants, minimum records is 10 & maximum is 100.
+* `number_of_records` parameter is optional .i.e {number_of_records=`100`} depends on how many records user wants, minimum records is `10` & maximum is `100`.
 
 
 ### Description:
@@ -503,9 +503,9 @@ The following endpoint edits the user details such as the name, email, date_of_j
 The following endpoint retrieves the details of all the transaction log from biot account.
 
 ### Instructions 
-*  Default user will able to retrieves 100 records per page.
+*  Default user will able to retrieves `100` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `number_of_records` parameter is optional .i.e {number_of_records=1000} depends on how many records user wants, minimum records is 100 & maximum is 1000.
+* `number_of_records` parameter is optional .i.e {number_of_records=`1000`} depends on how many records user wants, minimum records is `100` & maximum is `1000`.
 *  In order to consume this transaction's api transaction_type, transaction_from_date, transaction_to_date, attendance_from_date,attendance_to_date & transaction_id      are the parameters that will be used throughout this transaction api.
 
 
