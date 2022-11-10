@@ -19,12 +19,9 @@ This Api service will help users to synchronize their data with biot & fetch tha
 
 ## Login
 
-### Step 1: Login inside Biot User panel: 
-When a user sends a request with payload (mobile_number & password) an authentication token is generated which you will receive in your response as well as you will receive authentication-key via mail.  
-
-**Note** you need to pass both `authentication token` & `authentication-key` inside your header while calling any api
-
-
+### Step 1: Login:
+when user purchase Api's they will recieve a mail which contains `Mobile Number` & `Authy Key`, which they have to use while calling Login api.
+When a user sends a request with payload (mobile_number & auth_key) an authentication token is generated which you will receive in your response.
 
 ### All Api Request & Response are shown below:
 
@@ -33,7 +30,9 @@ When a user sends a request with payload (mobile_number & password) an authentic
 base_url =  https://biotworld.in/api/external
 
 ```
-### Authentication API:
+
+
+### Login API:
  ```
   Method: POST
   URL: <base_url>/login
@@ -41,11 +40,11 @@ base_url =  https://biotworld.in/api/external
 
 
 #### Request
- User will Send a request with Mobile Number & Password
+ User will Send a request with Mobile Number & Auth Key
 ```json
 {
    "mobile_number": "9586722584",
-   "password"     : "12345"     ,
+   "auth_key"     : "gzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE",
 }
 
 ```
@@ -68,6 +67,8 @@ If Mobile number or password is incorrect then user will get below response.
   "message": "Invalid Credentials." 
 }
 ```
+
+
 If your acccount is not active then user will get below response.
 ```json
 {
@@ -76,6 +77,8 @@ If your acccount is not active then user will get below response.
   "message": "Your account is inactive." 
 }
 ```
+
+
 If your acccount is not registered then user will get below response.
 ```json
 {
@@ -85,14 +88,18 @@ If your acccount is not registered then user will get below response.
 }
 ```
 
-## 1A) User Synchronization Post Api
 
+**Note** you need to pass both `token` & `authentication key` inside your header while calling any of the below api
+
+
+## 1A) User Synchronization Post Api
 ### Instructions:
 * Users can send Maximum 10 records within a single API hit.
+* If more than 10 records are initiated at single hit it will throw error .i.e More than 10 records at once is initiated
+
+
+
 * List of field's which needs to be pass in the payload while calling Api
-* If more than 10 records are initiated at single hit it will throw error .i.e More than 10 records at once was initiated
-
-
 
 | Field | Datatype | Requirements | Description |
 | :--- | :--- | :--- | :--- |
@@ -109,8 +116,8 @@ If your acccount is not registered then user will get below response.
 | Off Day 1 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
 | Off Day 2 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
 | Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
-| Off Day 2 Type | varchar(30) | Optional | Full Day, Half Day apply for Week_off_day2|
-| User Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
+| Off Day 2 Type | varchar(30) | Optional | Full Day, Half Day (apply for Week_off_day2) |
+| User Role | int[1] | Optional | Pass 0=Normal User, 3=Supervisor |
 
 #### Note: `User Role` parameter & value with description:
 
@@ -126,17 +133,17 @@ The following endpoint creates a user using basic details such as name, email, m
 1. This Parameter user_role is used to assign specific roles to users, roles can be either normal user, supervisor, Default value for parameter role is considered as 0.
 2. Below is the detail explanation about roles :
 
-
   * Normal User can mark & regularize the attendance 
   * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page (           EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,           Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
 
-### Step 1: Pass Authentication Token & authentic-key in the headers:
-Now the user will need to pass that authentication token & authentication-key in headers to receive any response without that you will not be able to fetch data.
+### Step 1: Pass Token & authentic-key in the headers:
+Now the user will need to pass that token which you have generated while login & authentication-key which you have recieved via mail in the headers.
+
 
 ```
  Method: POST
- URL: <base_url>/employee
+ URL: <base_url>/user
  Header: 
 "token": <jwt token>,
 "authentication-key": <client will get it from their email>,
@@ -153,7 +160,8 @@ Now the user will need to pass that authentication token & authentication-key in
        "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-1999",
        "mobile_number":"2309201912",
-       "email":"test@gmail.com",
+       "email":"john@gmail.com",
+       "department":"software",
        "gender":"male", 
        "designation":"project manager",
        "shift_start_time":"10:00",
@@ -164,16 +172,16 @@ Now the user will need to pass that authentication token & authentication-key in
            "offday2_applies_to_week": "2nd, 4th",
            "offday2_type": "half day"
         },
-       "user_role":"2"
+       "user_role":"0"
      },
     {
-       "name":"Dwayne Johnson" ,
+       "name":"Kriti Kumari" ,
        "date_of_joining":"23–09-2019",
        "date_of_birth":"23–09-1998",
        "mobile_number":"2309201922",
-       "email":"test@gmail.com",
-       "gender":"male",
-       "location":"ahmedabad",
+       "email":"kriti@gmail.com",
+       "department":"software",
+       "gender":"female",
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
@@ -183,7 +191,7 @@ Now the user will need to pass that authentication token & authentication-key in
            "offday2_applies_to_week": "2nd, 4th",
            "offday2_type": "half day"
        },
-       "user_role":"0",
+       "user_role":"3",
     },
 
   ]
