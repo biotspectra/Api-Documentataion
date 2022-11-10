@@ -1,7 +1,7 @@
 
 # Third Party API Integrations
 
-We've written a quick step-by-step guide to walk you through how to login using our Login api, make your first API call inside your system, and interpret the results.
+We've written a quick step-by-step guide to walk you through how to integrate our Api's, make your first API call inside your system, and interpret the results.
 
 
 ## Introduction
@@ -518,18 +518,18 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 | Transaction ID | User Id | Transaction Date | Transaction Time | In Out Flag |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | 10001 | 2022-01-01 |10:00:00 | I |
-| 2 | 10001 | 2022-01-01 |11:00:00 | O |
-| 3 | 10002 | 2022-01-01 |11:00:00 | I |
-| 4 | 10001 | 2022-01-01 |12:00:00 | I |
-| 5 | 10002 | 2022-01-01 |13:00:00 | O |
-| 6 | 10002 | 2022-01-01 |14:00:00 | I |
-| 7 | 10001 | 2022-01-01 |15:00:00 | O |
-| 8 | 10001 | 2022-01-01 |16:00:00 | I |
-| 9 | 10002 | 2022-01-01 |17:00:00 | O |
-| 10 | 10001 | 2022-01-01 |18:00:00 | O |
-| 11 | 10001 | 2022-01-01 |19:00:00 | I |
-| 12 | 10003 | 2022-01-01 |19:00:00 | I |
+| 1 | 10001 | 2022-01-01 |10:00:00 | IN |
+| 2 | 10001 | 2022-01-01 |11:00:00 | OUT |
+| 3 | 10002 | 2022-01-01 |11:00:00 | IN |
+| 4 | 10001 | 2022-01-01 |12:00:00 | IN |
+| 5 | 10002 | 2022-01-01 |13:00:00 | OUT |
+| 6 | 10002 | 2022-01-01 |14:00:00 | IN |
+| 7 | 10001 | 2022-01-01 |15:00:00 | OUT |
+| 8 | 10001 | 2022-01-01 |16:00:00 | IN |
+| 9 | 10002 | 2022-01-01 |17:00:00 | OUT |
+| 10 | 10001 | 2022-01-01 |18:00:00 | OUT |
+| 11 | 10001 | 2022-01-01 |19:00:00 | IN |
+| 12 | 10003 | 2022-01-01 |19:00:00 | IN |
 
 ### Example 2 ###
 * First Punch & Last Punch Logs (Records based on Example 1):
@@ -551,10 +551,22 @@ The following endpoint retrieves the details of all the transaction log from bio
 | 10003 | 2022-01-01 | 19:00:00 | NULL | NUll |
 
 
+### Example 4 ###
+* Latest Transaction Logs (Records based on Example 1):
+* If we pass Transaction Id as `6`
+
+| Transaction ID | User Id | Transaction Date | Transaction Time | In Out Flag |
+| :--- | :--- | :--- | :--- | :--- |
+| 7 | 10001 | 2022-01-01 |15:00:00 | OUT |
+| 8 | 10001 | 2022-01-01 |16:00:00 | IN |
+| 9 | 10002 | 2022-01-01 |17:00:00 | OUT |
+| 10 | 10001 | 2022-01-01 |18:00:00 | OUT |
+| 11 | 10001 | 2022-01-01 |19:00:00 | IN |
+| 12 | 10003 | 2022-01-01 |19:00:00 | IN |
+
 
 ### Step 1: When User pass `transaction_type` as `0`
-* User need to pass `transaction_from_date` & `transaction_to_date` parameters in the url i.e. if user wants transaction records between `1-01-2022` to `30-01-2022`.     This parameters will get users `All` transactions logs of the user between this particular date.
-* `transaction_from_date` & `transaction_to_date` parameters not mandatory. 
+*  When user passes `transaction_type` as `0` they need to pass other two parameters `transaction_from_date` & `transaction_to_date` i.e. if user wants transaction        records between `1-01-2022` to `30-01-2022`. This parameters will get users `All` transactions logs of the user between this particular date.
 
 
 ``` 
@@ -575,32 +587,46 @@ The following endpoint retrieves the details of all the transaction log from bio
 "data":[
 	 {
             "user_id":"10000119",
+	    "transaction_id":"1",
             "name":"john smith",
             "department":"development",
             "designation":"project manager",
             "date":"2022-10-27",
             "time":"10:00:00",	
-            "punch_flag":"IN"
+            "in_out_flag":"IN"
              
  	  },
              
           {
               "user_id":"10000119",
-              "name":"john smith",
+	      "transaction_id":"2",
+              "name":"John Doe",
               "department":"development",
               "designation":"project manager",
               "date":"2022-10-27",
               "time":"19:00:00",	
-              "punch_flag":"OUT"
+              "in_out_flag":"OUT"
 	      
- 	  }
+ 	  },
+	  
+	 {
+             "user_id":"10000119",
+	     "transaction_id":"3",
+             "name":"Henry Klaseen",
+             "department":"development",
+             "designation":"project manager",
+             "date":"2022-10-27",
+             "time":"19:00:00",	
+             "in_out_flag":"OUT"
+	      
+ 	 }
        ]
 }
 ```
 
 ### Step 2: When User pass `transaction_type` as `1`
-* Users need to pass attendance_date parameter in the url these parameters will get users first punch & last punch logs.
-* `attendance_date` parameters are mandatory. 
+
+* When user passes `transaction_type` as `1` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first` & `last`   punch records between `1-01-2022` to `30-01-2022`. This parameters will get users all first & last punch user wise as well as date wise between this particular date.
 
 
 
@@ -639,8 +665,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 ```
 
 ### Step 3: When User pass `transaction_type` as `2`
-* Users need to pass attendance_date parameter in the url these parameters will get users first in punch & last out punch logs.
-* `attendance_date` parameters are mandatory. 
+* When user passes `transaction_type` as `2` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first in` & `last out` punch records between `1-01-2022` to `30-01-2022`. This parameters will get users all `first in` & `last out` punch user wise as well as date wise between     this particular date.
 
 
 
@@ -662,6 +687,72 @@ The following endpoint retrieves the details of all the transaction log from bio
 "data":[
 	 {
              "user_id":"10000119",
+             "name":"john smith",
+             "department":"development",
+             "designation":"project manager",
+             "first_in_date":"2022-10-27",
+             "first_in_time":"10:00:00",	
+             "first_in_device_id":"5d44",
+             "last_out_date":"2022-10-27",
+             "last_out_time":"19:00:00",	
+             "last_out_device_id":"5d55",
+          }
+	]
+}
+
+
+```
+
+### Step 4: When User pass `transaction_type` as `3`
+* When user passes `transaction_type` as `3` they need to pass one parameter `transaction_id` i.e. user wants all latest records after requested Transaction Id like     shown in `Example 4` , user will receive all Transaction logs after Transaction Id `3`.
+
+
+
+``` 
+
+ Method: GET
+ URL: <base_url>/transactions?transaction_type=3&transaction_id=3&page_number=1
+ Header: 
+"token": <jwt token>,
+"authentic-key": <client will get it from their email>,
+"content-type": application/json
+
+```
+
+#### Response for Transaction log (when transaction_type == 2): 
+
+``` json
+{
+"data":[
+	 {
+             "user_id":"10000119",
+	     "transaction_type":"4",
+             "name":"john smith",
+             "department":"development",
+             "designation":"project manager",
+             "first_in_date":"2022-10-27",
+             "first_in_time":"10:00:00",	
+             "first_in_device_id":"5d44",
+             "last_out_date":"2022-10-27",
+             "last_out_time":"19:00:00",	
+             "last_out_device_id":"5d55",
+          },
+	   {
+             "user_id":"10000119",
+	     "transaction_type":"5",
+             "name":"Dwyane smith",
+             "department":"development",
+             "designation":"project manager",
+             "first_in_date":"2022-10-27",
+             "first_in_time":"10:00:00",	
+             "first_in_device_id":"5d44",
+             "last_out_date":"2022-10-27",
+             "last_out_time":"19:00:00",	
+             "last_out_device_id":"5d55",
+          },
+	   {
+             "user_id":"10000119",
+	     "transaction_type":"6",
              "name":"john smith",
              "department":"development",
              "designation":"project manager",
