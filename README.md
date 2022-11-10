@@ -97,19 +97,18 @@ If your acccount is not registered then user will get below response.
 | Field | Datatype | Requirements | Description |
 | :--- | :--- | :--- | :--- |
 | Name | varchar(50) | Mandatory | Enter Full Name|
-| Date of joining | varchar(50) | Mandatory | Enter the Date of Joining of the user|
+| Date of joining | datetime | Mandatory | Enter the Date of Joining of the user|
 | Email| varchar(50) | Mandatory | Enter Email Id for the user |
-| Mobile No  | varchar(13)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
+| Mobile No  | varchar(15)  | Mandatory | Mobile number with country code. I.e +91 9898989898 |
 | Date of Birth | dateTime() | Optional | Enter Date of birth of the user |
 | Gender | varchar(50) | Optional | Male,Female,other |
-| User Mode | tinyint(1)  | Mandatory | 1= Access, 2= Attendance, 3=Both |
 | Department | varchar(30) | Optional | Name of Department which belongs to the user.|
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
 | Designation | varchar(30)  | Optional | Enter Designation of the user|
-| Off Day 1 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 | tinyint(1)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if    all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
+| Off Day 1 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 | varchar(30)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Off Day 2 Applies To Week | varchar(30) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
 | Off Day 2 Type | varchar(30) | Optional | Full Day, Half Day apply for Week_off_day2|
 | User Role | int[1] | Optional | Pass 0=Normal User, 2=Sub Admin, 3=Supervisor |
 
@@ -118,19 +117,18 @@ If your acccount is not registered then user will get below response.
 | Parameter | Value | Description |
 | :--- | :--- | :--- |
 | user_role | 0 | Normal User Data |
-| user_role | 2 | Sub Admin |
 | user_role | 3 | Supervisor |
-| user_role | Other Than 0,2,3 | Provided user_role is not available|
+| user_role | Other Than 0,3 | Provided user_role is not available|
 
 #### Description:
 The following endpoint creates a user using basic details such as name, email, mobile_number, department, designation and so on.
 
-1. This Parameter user_role is used to assign specific roles to users, roles can be either normal user, sub admin or supervisor, Default value for parameter role is considered as 0 .
-2. Below is the detail explanation about roles:
+1. This Parameter user_role is used to assign specific roles to users, roles can be either normal user, supervisor, Default value for parameter role is considered as 0.
+2. Below is the detail explanation about roles :
+
 
   * Normal User can mark & regularize the attendance 
-  * Sub Admin is as good as admin but with limited functionality i.e. no access to device management, Can enable or disable successful / Unsuccessful       punch     notification & can enable or disable successful / Unsuccessful punch notification 
-  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page (     EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,     Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
+  * Supervisor can perform below activity i.e. Full functionality of User Role, Limited Access to “User” Page ( EDIT USER ONLY ), Limited Access to “User” Page (           EDIT USER ONLY ), Can capture photo of user, Access to “Identity” & “Accessible Devices” tabs, Identity Tab : To Register Fingers & Face and assign BLE card,           Accessible Devices : To Give access on Biot Devices, Can not assign Supervisor role to existing users
   
 
 ### Step 1: Pass Authentication Token & authentic-key in the headers:
