@@ -1,7 +1,7 @@
 
 # Third Party API Integrations
 
-We've written a quick step-by-step guide to walk you through how to integrate our Api's, make your first API call inside your system, and interpret the results.
+We've written a quick step-by-step guide to walk you through how to integrate our Api, make your first API call inside your system, and interpret the results.
 
 
 ## Introduction
@@ -20,7 +20,7 @@ This Api service will help users to synchronize their data with biot & fetch tha
 ## Login
 
 ### Step 1: Login:
-when user purchase Api's they will recieve a mail which contains `Mobile Number` & `Authy Key`, which they have to use while calling Login api.
+When users purchase Api's they will receive a mail which contains `Mobile Number` & `Authy Key`, which they have to use while calling Login api.
 When a user sends a request with payload (mobile_number & auth_key) an authentication token is generated which you will receive in your response.
 
 ### All Api Request & Response are shown below:
@@ -59,7 +59,7 @@ base_url =  https://biotworld.in/api/external
 ```
 
 #### Error Response
-If Mobile number or auth key is incorrect then user will get below response.
+If the Mobile number or auth key is incorrect then the user will get the below response.
 ```json
 {
   "status": "failed",
@@ -69,7 +69,7 @@ If Mobile number or auth key is incorrect then user will get below response.
 ```
 
 
-If your acccount is not active then user will get below response.
+If your account is not active then the user will get the below response.
 ```json
 {
   "status": "failed",
@@ -79,7 +79,7 @@ If your acccount is not active then user will get below response.
 ```
 
 
-If your acccount is not registered then user will get below response.
+If your account is not registered then the user will get the below response.
 ```json
 {
   "status": "failed",
@@ -113,10 +113,10 @@ If your acccount is not registered then user will get below response.
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
 | Designation | varchar(50)  | Optional | Enter Designation of the user|
-| Week Off Day 1 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Week Off Day 2 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Week Off Day 1 | varchar(50)  | Optional | Pass number of days. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Week Off Day 2 | varchar(50)  | Optional | Pass number of days. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
 | Week Off Day 2 Applies To Week | varchar(50) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
-| Off Day 2 Type | varchar(50) | Optional | FULLDAY, HALFDAY (apply for Week_off_day2) **It Should be requetsed in this format only**|
+| Off Day 2 Type | varchar(50) | Optional | FULLDAY, HALFDAY (apply for Week_off_day2) **It Should be requested in this format only**|
 | User Role | int[1] | Optional | Pass 0=Normal User, 3=Supervisor |
 
 #### Note: `User Role` parameter & value with description:
@@ -138,7 +138,7 @@ The following endpoint creates a user using basic details such as name, email, m
   
 
 ### Step 1: Pass Token & authentic-key in the headers:
-Now the user will need to pass that token which you have generated while login & authentication-key which you have recieved via mail in the headers.
+Now the user will need to pass that token which you have generated while login & authentication-key which you have received via mail in the headers.
 
 
 ```
@@ -210,7 +210,8 @@ success response would be "User data has been synced successfully".
 ```
 
 #### Response when while there is error in saving some data: 
-In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has synced successfully so next time the user only send the particular object in which user receives the error.
+In case any error occurs during sending the request, then the user will be able to see in response for which particular object the error occurred & which object has synced successfully so next time the user only sends the particular object in which the user receives the error.
+
 
 
 ``` json
@@ -274,7 +275,7 @@ In case any error occurs during sending the request, then the user will be able 
 | 6 | Maximum Limit Exceeded for Mobile Number| Mobile number limit exceeded above 15 | Ensure that 15 digits are passed  |
 | 7 | Please enter valid date-format  | {date of joining / date of birth } format is not valid | Date format should be (dd-mm-yyyy) |
 | 8 | Please enter valid start/end shift time | {shift start time / shift end time } format is not valid | Start/end shift should be in 24 hrs format in HH:MM|
-| 9 | Provided user_role is not available | Only 1 & 3 user role value is allowed | Ensure that only 1(normal user) & 3(supervisior) role is passed |
+| 9 | Provided user_role is not available | Only 1 & 3 user role value is allowed | Ensure that only 1(normal user) & 3(supervisor) role is passed |
 | 10 | User Limit Exceeded| Users can send Maximum 10 records within a single API hit | Ensure that you don't send more than 10 records |
 
 
@@ -283,13 +284,14 @@ In case any error occurs during sending the request, then the user will be able 
 ## 1B) User Synchronization Get Api:
 
 ### Instructions 
-*  Default user will able to retrieves `10` records per page.
+*  Default users will be able to retrieve `10` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `number_of_records` parameter is optional .i.e {number_of_records=`100`} depends on how many records user wants, minimum records is `10` & maximum is `100`.
+* `number_of_records` parameter is optional .i.e {number_of_records=`100`} depends on how many records the user wants, minimum records is `10` & maximum is `100`.
+
 
 
 ### Description:
-* The following endpoint retrieves the details of all the user data from biot account.
+* The following endpoint retrieves the details of all the user data from the biot account.
 
 #### Default 10 records will retrieve
 ``` 
@@ -398,15 +400,15 @@ In case any error occurs during sending the request, then the user will be able 
 #### Error Response & their failure cases are shown below:
 | Error message| Cause | Solution
 | :--- | :--- | :--- |
-| No Data Available | The {User Id,Date of joining,Date of birth,Mobile number,Email,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that valid endpoint is passed and belongs to the requestor.|
+| No Data Available | The {User Id,Date of joining,Date of birth,Mobile number,Email,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that a valid endpoint is passed and belongs to the requestor.|
 
 
 
 ## 1c) User Synchronization Edit Api:
-* This Api is used to Edit User records from Biot account.
+* This Api is used to Edit User records from Biot accounts
 
 ### Description:
-The following endpoint edits the user details such as the name, email, date_of_joining and so on. If user passes same `User Id` with different records then the record for the particular user will be updated.
+The following endpoint edits the user details such as the name, email, date_of_joining and so on. If a user passes the same `User Id` with different records then the record for the particular user will be updated.
 
 
 ```
@@ -488,18 +490,18 @@ The following endpoint edits the user details such as the name, email, date_of_j
 
 
 ## 2) Transaction (punch detail) :
-The following endpoint retrieves the details of all the transaction log from biot account.
+The following endpoint retrieves the details of all the transaction log from the biot account.
 
 ### Instructions 
-*  Default user will able to retrieves `100` records per page.
+*  Default users will be able to retrieve `100` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
-* `number_of_records` parameter is optional .i.e {number_of_records=`1000`} depends on how many records user wants, minimum records is `100` & maximum is `1000`.
+* `number_of_records` parameter is optional .i.e {number_of_records=`1000`} depends on how many records the user wants, minimum records is `100` & maximum is `1000`.
 *  In order to consume this transaction's api transaction_type, transaction_from_date, transaction_to_date, attendance_from_date,attendance_to_date & transaction_id      are the parameters that will be used throughout this transaction api.
 
 
 ### Description: 
 * Transaction Type : When transaction_type is passed as `0` then all the transaction logs will be retrieve, when passed as `1` then First punch & Last Punch user wise   records will be retrieved, when passed as `2` then First In Punch & Last Out Punch user wise records will be retrieved & when passed as `3` then latest transaction     log will retrieved based on requested transaction_id .
-* Transaction Id : Transaction Id is unique number which is auto generated for each and every transaction logs.
+* Transaction Id : Transaction Id is a unique number which is auto generated for each and every transaction log.
 
 ### Example 1 ###
 * All Transaction Logs:
@@ -554,7 +556,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 
 ### Step 1: When User pass `transaction_type` as `0`
-*  When user passes `transaction_type` as `0` they need to pass other two parameters `transaction_from_date` & `transaction_to_date` i.e. if user wants transaction        records between `1-01-2022` to `30-01-2022`. This parameters will get users `All` transactions logs of the user between this particular date.
+*  When user passes `transaction_type` as `0` they need to pass other two parameters `transaction_from_date` & `transaction_to_date` i.e. if user wants transaction        records between `1-01-2022` to `30-01-2022`. These parameters will get users 'All transactions logs of the user between this particular date.
 
 
 ``` 
@@ -614,7 +616,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 ### Step 2: When User pass `transaction_type` as `1`
 
-* When user passes `transaction_type` as `1` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first` & `last`   punch records between `1-01-2022` to `30-01-2022`. This parameters will get users all first & last punch user wise as well as date wise between this particular date.
+* When user passes `transaction_type` as `1` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first` & `last`   punch records between `1-01-2022` to `30-01-2022`.These parameters will get users all first & last punch user wise as well as date wise between this particular date.
 
 
 
@@ -653,7 +655,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 ```
 
 ### Step 3: When User pass `transaction_type` as `2`
-* When user passes `transaction_type` as `2` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first in` & `last out` punch records between `1-01-2022` to `30-01-2022`. This parameters will get users all `first in` & `last out` punch user wise as well as date wise between     this particular date.
+* When user passes `transaction_type` as `2` they need to pass other two parameters ` attendance_from_date` & `attendance_to_date` i.e. if user wants `first in` & `last out` punch records between `1-01-2022` to `30-01-2022`. These parameters will get users all `first in` & `last out` punch user wise as well as date wise between     this particular date.
 
 
 
@@ -824,7 +826,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 #### Error Response & their failure cases are shown below:
 | Error message| Cause | Solution |
 | :--- | :--- | :--- |
-| No Data Available | The {User Id,Device id ,Date ,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that valid endpoint is passed and belongs to the requestor.|		    
+| No Data Available | The {User Id,Device id ,Date ,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that a valid endpoint is passed and belongs to the requestor.|		    
 			    
 			
 
