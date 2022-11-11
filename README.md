@@ -113,10 +113,10 @@ If your acccount is not registered then user will get below response.
 | Shift Start Time | dateTime() | Optional | Shift Start Time user need to provide shift start time as 24 hrs format in HH:MM |
 | Shift End Time | dateTime() | Optional |  Shift End Time user need to provide shift End time as 24 hrs format in HH:MM |
 | Designation | varchar(50)  | Optional | Enter Designation of the user|
-| Off Day 1 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
-| Off Day 2 Applies To Week | varchar(50) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
-| Off Day 2 Type | varchar(50) | Optional | Full Day, Half Day (apply for Week_off_day2) |
+| Week Off Day 1 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Week Off Day 2 | varchar(50)  | Optional | Pass number of day. i.e. Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday |
+| Week Off Day 2 Applies To Week | varchar(50) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
+| Off Day 2 Type | varchar(50) | Optional | FULLDAY, HALFDAY (apply for Week_off_day2) **It Should be requetsed in this format only**|
 | User Role | int[1] | Optional | Pass 0=Normal User, 3=Supervisor |
 
 #### Note: `User Role` parameter & value with description:
@@ -167,12 +167,10 @@ Now the user will need to pass that token which you have generated while login &
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_off" : {
-           "offday1": "Sunday",
-           "offday2": "Saturday",
-           "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "half day"
-        },
+       "week_off_offday1": "Sunday",
+       "week_off_offday1": "Saturday",
+       "week_off_offday2_applies_to_week": "2nd, 4th",
+       "week_off_offday2_type": "FULLDAY",
        "user_role":"0"
      },
     {
@@ -187,12 +185,10 @@ Now the user will need to pass that token which you have generated while login &
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_off" : {
-           "offday1": "Sunday",
-           "offday2": "Saturday",
-           "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "half day"
-       },
+       "week_off_offday1": "Sunday",
+       "week_off_offday1": "Saturday",
+       "week_off_offday2_applies_to_week": "2nd, 4th",
+       "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
     },
 
@@ -333,12 +329,10 @@ In case any error occurs during sending the request, then the user will be able 
             "designation":"project manager",
             "shift_start_time":"10:00:00",
             "shift_end_time":"19:00:00",
-            "week_off": {
-               "offday1": "Sunday",
-               "offday2": "Saturday",
-               "offday2_applies_to_week": "2nd, 4th",
-               "offday2_type": "half day"
-             },
+            "week_off_offday1": "Sunday",
+            "week_off_offday1": "Saturday",
+            "week_off_offday2_applies_to_week": "2nd, 4th",
+            "week_off_offday2_type": "FULLDAY",
             "user_role":"3",
          },
         {
@@ -353,12 +347,10 @@ In case any error occurs during sending the request, then the user will be able 
           "designation":"project manager",
           "shift_start_time":"10:00:00",
           "shift_end_time":"19:00:00",
-          "week_off":  {
-               "offday1": "Sunday",
-               "offday2": "Saturday",
-               "offday2_applies_to_week": "2nd, 4th",
-               "offday2_type": "half day"
-          },
+          "week_off_offday1": "Sunday",
+          "week_off_offday1": "Saturday",
+          "week_off_offday2_applies_to_week": "2nd, 4th",
+          "week_off_offday2_type": "HALFDAY",
           "user_role":"0",
          },
 
@@ -443,12 +435,10 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_off" : {
-           "offday1": "Sunday",
-           "offday2": "Saturday",
-           "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "half day"
-        },
+          "week_off_offday1": "Sunday",
+       "week_off_offday1": "Saturday",
+       "week_off_offday2_applies_to_week": "2nd, 4th",
+       "week_off_offday2_type": "FULLDAY",
        "user_role":"0"
      },
     {
@@ -463,12 +453,10 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-       "week_off" : {
-           "offday1": "Sunday",
-           "offday2": "Saturday",
-           "offday2_applies_to_week": "2nd, 4th",
-           "offday2_type": "half day"
-       },
+       "week_off_offday1": "Sunday",
+       "week_off_offday1": "Saturday",
+       "week_off_offday2_applies_to_week": "2nd, 4th",
+       "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
     },
 
@@ -834,7 +822,7 @@ The following endpoint retrieves the details of all the transaction log from bio
 
 ```
 #### Error Response & their failure cases are shown below:
-| Error message| Cause | Solution
+| Error message| Cause | Solution |
 | :--- | :--- | :--- |
 | No Data Available | The {User Id,Device id ,Date ,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that valid endpoint is passed and belongs to the requestor.|		    
 			    
