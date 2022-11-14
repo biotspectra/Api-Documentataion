@@ -823,10 +823,12 @@ The following endpoint retrieves the details of all the transaction log from the
 <base_url>/transactions?transaction_type=0&department=development&designation=manager&page_number=1
 
 ```
+
 #### Error Response & their failure cases are shown below:
-| Error message| Cause | Solution |
-| :--- | :--- | :--- |
-| No Data Available | The {User Id,Device id ,Date ,Department,Designation} does not belong to the requestor, or it doesn't exist. | Ensure that a valid endpoint is passed and belongs to the requestor.|		    
+
+|Error Code|Error message| Cause | Solution |
+|:--- | :--- | :--- | :--- |
+| 2 | Data Already Exist | An existing user record has been passed .i.e {email,mobile number} | Ensure that a unique user email & mobile number is passed |	    
 			    
 			
 
