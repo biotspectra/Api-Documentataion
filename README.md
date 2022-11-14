@@ -479,7 +479,7 @@ The following endpoint edits the user details such as the name, email, date_of_j
 ```
 
 
-| Error code | Error message| Cause | Solution
+| Error code | Error message| Cause | Solution |
 | :--- | :--- | :--- | :--- |
 | 2 | Data Already Exist | An existing user record has been passed .i.e {email,mobile number} | Ensure that a unique user email & mobile number is passed |
 
