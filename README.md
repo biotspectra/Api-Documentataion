@@ -20,7 +20,7 @@ This Api service will help users to synchronize their data with biot & fetch tha
 ## Login
 
 ### Step 1: Login:
-When users purchase Api's they will receive a mail which contains `Sap Id` & `Authy Key`, which they have to use while calling Login api.
+When user purchase's Api's they will receive a mail which contains `Sap Id` & `Authy Key`, which they have to use while calling Login api.
 When a user sends a request with payload (sap_id & auth_key) an authentication token is generated which you will receive in your response.
 
 ### All Api Request & Response are shown below:
