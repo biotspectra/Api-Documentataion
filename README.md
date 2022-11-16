@@ -20,8 +20,8 @@ This Api service will help users to synchronize their data with biot & fetch tha
 ## Login
 
 ### Step 1: Login:
-When users purchase Api's they will receive a mail which contains `Mobile Number` & `Authy Key`, which they have to use while calling Login api.
-When a user sends a request with payload (mobile_number & auth_key) an authentication token is generated which you will receive in your response.
+When users purchase Api's they will receive a mail which contains `Sap Id` & `Authy Key`, which they have to use while calling Login api.
+When a user sends a request with payload (sap_id & auth_key) an authentication token is generated which you will receive in your response.
 
 ### All Api Request & Response are shown below:
 
@@ -40,10 +40,10 @@ base_url =  https://biotworld.in/api/external
 
 
 #### Request
- User will Send a request with Mobile Number & Auth Key
+ User will Send a request with Sap Id & Auth Key
 ```json
 {
-   "mobile_number": "9586722584",
+   "sap_id": "Sap-1023",
    "auth_key"     : "gzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE",
 }
 
@@ -118,6 +118,7 @@ If your account is not registered then the user will get the below response.
 | Week Off Day 2 Applies To Week | varchar(50) | Optional| Pass weekly off for which off day 2 is applied to be provided in comma separated value i.e. '2nd, 4th' ,if all off day 2 is observed as weekly off then input is to be provided as '1st, 2nd, 3rd, 4th, 5th' |
 | Off Day 2 Type | varchar(50) | Optional | FULLDAY, HALFDAY (apply for Week_off_day2) **It Should be requested in this format only**|
 | User Role | int[1] | Optional | Pass 0=Normal User, 3=Supervisor |
+| Active | varchar(50)| Optional | Active = If user is Active, InActive = If user is InActive |
 
 #### Note: `User Role` parameter & value with description:
 
@@ -171,7 +172,8 @@ Now the user will need to pass that token which you have generated while login &
        "week_off_offday1": "Saturday",
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "FULLDAY",
-       "user_role":"0"
+       "user_role":"0",
+       "status":"Active"
      },
     {
        "name":"Kriti Kumari",
@@ -190,6 +192,7 @@ Now the user will need to pass that token which you have generated while login &
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
+       "status:"InActive"
     },
 
   ]
@@ -283,15 +286,16 @@ In case any error occurs during sending the request, then the user will be able 
 
 ## 1B) User Synchronization Get Api:
 
+
+### Description:
+* The following endpoint retrieves the details of all the user data from the biot account.
+
 ### Instructions 
 *  Default users will be able to retrieve `10` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
 * `number_of_records` parameter is optional .i.e {number_of_records=`100`} depends on how many records the user wants, minimum records is `10` & maximum is `100`.
 
-
-
-### Description:
-* The following endpoint retrieves the details of all the user data from the biot account.
+### Examples:
 
 #### Default 10 records will retrieve
 ``` 
@@ -336,6 +340,7 @@ In case any error occurs during sending the request, then the user will be able 
             "week_off_offday2_applies_to_week": "2nd, 4th",
             "week_off_offday2_type": "FULLDAY",
             "user_role":"3",
+	    "status":"Active"
          },
         {
           "name":"riya joshi" ,
@@ -354,6 +359,7 @@ In case any error occurs during sending the request, then the user will be able 
           "week_off_offday2_applies_to_week": "2nd, 4th",
           "week_off_offday2_type": "HALFDAY",
           "user_role":"0",
+	  "status":"InActive"
          },
 
       ]
@@ -441,7 +447,9 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "week_off_offday1": "Saturday",
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "FULLDAY",
-       "user_role":"0"
+       "user_role":"0",
+       "status":"Active"
+       
      },
     {
        "name":"Kiran Kumari",
@@ -460,6 +468,7 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
+       "status":"Active"
     },
 
   ]
@@ -492,16 +501,16 @@ The following endpoint edits the user details such as the name, email, date_of_j
 ## 2) Transaction (punch detail) :
 The following endpoint retrieves the details of all the transaction log from the biot account.
 
+### Description: 
+* Transaction Type : When transaction_type is passed as `0` then all the transaction logs will be retrieve, when passed as `1` then First punch & Last Punch user wise   records will be retrieved, when passed as `2` then First In Punch & Last Out Punch user wise records will be retrieved & when passed as `3` then latest transaction     log will retrieved based on requested transaction_id .
+* Transaction Id : Transaction Id is a unique number which is auto generated for each and every transaction log.
+
 ### Instructions 
 *  Default users will be able to retrieve `100` records per page.
 * `page_number` parameter is mandatory in order to consume this api .i.e. `1` or `2` or `3`....n to receive different records per page.
 * `number_of_records` parameter is optional .i.e {number_of_records=`1000`} depends on how many records the user wants, minimum records is `100` & maximum is `1000`.
 *  In order to consume this transaction's api transaction_type, transaction_from_date, transaction_to_date, attendance_from_date,attendance_to_date & transaction_id      are the parameters that will be used throughout this transaction api.
 
-
-### Description: 
-* Transaction Type : When transaction_type is passed as `0` then all the transaction logs will be retrieve, when passed as `1` then First punch & Last Punch user wise   records will be retrieved, when passed as `2` then First In Punch & Last Out Punch user wise records will be retrieved & when passed as `3` then latest transaction     log will retrieved based on requested transaction_id .
-* Transaction Id : Transaction Id is a unique number which is auto generated for each and every transaction log.
 
 ### Example 1 ###
 * All Transaction Logs:
