@@ -192,7 +192,7 @@ Now the user will need to pass that token which you have generated while login &
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
-       "status:"INACTIVE"
+       "status":"INACTIVE"
     },
 
   ]
