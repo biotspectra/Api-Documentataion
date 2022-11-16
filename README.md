@@ -20,7 +20,7 @@ This Api service will help users to synchronize their data with biot & fetch tha
 ## Login
 
 ### Step 1: Login:
-When user purchase's Api's they will receive a mail which contains `Sap Id` & `Authy Key`, which they have to use while calling Login api.
+When user purchase's Api's they will receive a mail which contains `Sap Code` & `Authy Key`, which they have to use while calling Login api.
 When a user sends a request with payload (sap_id & auth_key) an authentication token is generated which you will receive in your response.
 
 ### All Api Request & Response are shown below:
@@ -40,10 +40,10 @@ base_url =  https://biotworld.in/api/external
 
 
 #### Request
- User will Send a request with Sap Id & Auth Key
+ User will Send a request with Sap Code & Auth Key
 ```json
 {
-   "sap_id": "Sap-1023",
+   "sap_code": "Sap-1023",
    "auth_key"     : "gzMzM3NjMsImlkIjoxODQxLCJpYXQiOjE",
 }
 
@@ -173,7 +173,7 @@ Now the user will need to pass that token which you have generated while login &
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "FULLDAY",
        "user_role":"0",
-       "status":"Active"
+       "status":"ACTIVE"
      },
     {
        "name":"Kriti Kumari",
@@ -192,7 +192,7 @@ Now the user will need to pass that token which you have generated while login &
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
-       "status:"InActive"
+       "status:"INACTIVE"
     },
 
   ]
@@ -300,7 +300,7 @@ In case any error occurs during sending the request, then the user will be able 
 #### Default 10 records will retrieve
 ``` 
  Method: GET
- URL: <base_url>/employee?page_number=1
+ URL: <base_url>/user?page_number=1
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -310,7 +310,7 @@ In case any error occurs during sending the request, then the user will be able 
 #### When Number of records is 100 (Maximum)
 ``` 
  Method: GET
- URL: <base_url>/employee?page_number=1&number_of_records=100
+ URL: <base_url>/user?page_number=1&number_of_records=100
  Header: 
 "token": <jwt token>,
 "authentic-key": <client will get it from their email>,
@@ -340,7 +340,7 @@ In case any error occurs during sending the request, then the user will be able 
             "week_off_offday2_applies_to_week": "2nd, 4th",
             "week_off_offday2_type": "FULLDAY",
             "user_role":"3",
-	    "status":"Active"
+	    "status":"ACTIVE"
          },
         {
           "name":"riya joshi" ,
@@ -359,7 +359,7 @@ In case any error occurs during sending the request, then the user will be able 
           "week_off_offday2_applies_to_week": "2nd, 4th",
           "week_off_offday2_type": "HALFDAY",
           "user_role":"0",
-	  "status":"InActive"
+	  "status":"INACTIVE"
          },
 
       ]
@@ -382,24 +382,26 @@ In case any error occurs during sending the request, then the user will be able 
 | email  | string | Response will filtered with given email  |
 | department  | string | Response will filtered with given department  |
 | designation | string | Response will filtered with given designation  |
+| status | string | Response will filtered with given status  |
 
 
 #### Filter with Single Parameters:
 ```
-1. Name            :  <base_url>/employee?name=rajat&page_number=1
-2. UserID          :  <base_url>/employee?user_id=256&page_number=1
-3. Date of joining :  <base_url>/employee?date_of_joining=22-11-2020&page_number=1
-4. Date of birth   :  <base_url>/employee?date_of_birth=11-05-1994&page_number=1
-5. Mobile number   :  <base_url>/employee?mobile_number=8469368525&page_number=1
-6. Email           :  <base_url>/employee?email=rajat@gmail.com&page_number=1 
-7. Department      :  <base_url>/employee?department=development&page_number=1
-8. Designation     :  <base_url>/employee?designation=manager&page_number=1
+1. Name            :  <base_url>/user?name=rajat&page_number=1
+2. UserID          :  <base_url>/user?user_id=256&page_number=1
+3. Date of joining :  <base_url>/user?date_of_joining=22-11-2020&page_number=1
+4. Date of birth   :  <base_url>/user?date_of_birth=11-05-1994&page_number=1
+5. Mobile number   :  <base_url>/user?mobile_number=8469368525&page_number=1
+6. Email           :  <base_url>/user?email=rajat@gmail.com&page_number=1 
+7. Department      :  <base_url>/user?department=development&page_number=1
+8. Designation     :  <base_url>/user?designation=manager&page_number=1
+9. Status          :  <base_url>/user?status=ACTIVE&page_number=1
 
 ```
 
 #### Filter with Multiple Parameters:
 ```
-<base_url>/employee?department=IT&designation=manager&page_number=1
+<base_url>/user?department=IT&designation=manager&page_number=1
 
 ```
 
@@ -443,12 +445,12 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "designation":"project manager",
        "shift_start_time":"10:00",
        "shift_end_time":"19:00",
-          "week_off_offday1": "Sunday",
+       "week_off_offday1": "Sunday",
        "week_off_offday1": "Saturday",
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "FULLDAY",
        "user_role":"0",
-       "status":"Active"
+       "status":"ACTIVE"
        
      },
     {
@@ -468,7 +470,7 @@ The following endpoint edits the user details such as the name, email, date_of_j
        "week_off_offday2_applies_to_week": "2nd, 4th",
        "week_off_offday2_type": "HALFDAY",
        "user_role":"3",
-       "status":"Active"
+       "status":"ACTIVE"
     },
 
   ]
@@ -817,12 +819,12 @@ The following endpoint retrieves the details of all the transaction log from the
 
 #### Filter for single Parameter:
 ```
-1. Name            :  <base_url>/employee?name=rajat&page_number=1
-2. UserID          :  <base_url>/employee?user_id=256&page_number=1
+1. Name            :  <base_url>/user?name=rajat&page_number=1
+2. UserID          :  <base_url>/user?user_id=256&page_number=1
 3. Device id       :  <base_url>/transactions?transaction_type=0&device_id=5d55&page_number=1
-4. Date            :  <base_url>/employee?date=22-11-2020&page_number=1
-5. Department      :  <base_url>/employee?department=development&page_number=1
-6. Designation     :  <base_url>/employee?designation=manager&page_number=1
+4. Date            :  <base_url>/user?date=22-11-2020&page_number=1
+5. Department      :  <base_url>/user?department=development&page_number=1
+6. Designation     :  <base_url>/user?designation=manager&page_number=1
 
 ```
 
